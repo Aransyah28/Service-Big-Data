@@ -1,0 +1,329 @@
+{
+    "dbd_ml_results": [
+        {
+            "month": "Januari",
+            "year": 2023,
+            "total_cases": 15234,
+            "most_influential_factor": "Curah Hujan",
+            "factor_importance": 0.85,
+            "secondary_factor": "Kepadatan Penduduk",
+            "secondary_importance": 0.72,
+            "tertiary_factor": "Sanitasi Lingkungan",
+            "tertiary_importance": 0.65,
+            "temperature_avg": 28.5,
+            "humidity_avg": 85.2,
+            "rainfall_mm": 320.5,
+            "population_density": 1250.3,
+            "sanitation_index": 65.4,
+            "healthcare_access": 72.1,
+            "prediction_accuracy": 0.92
+        },
+        {
+            "month": "Februari",
+            "year": 2023,
+            "total_cases": 18567,
+            "most_influential_factor": "Curah Hujan",
+            "factor_importance": 0.88,
+            "secondary_factor": "Kelembaban",
+            "secondary_importance": 0.75,
+            "tertiary_factor": "Kepadatan Penduduk",
+            "tertiary_importance": 0.68,
+            "temperature_avg": 28.2,
+            "humidity_avg": 88.5,
+            "rainfall_mm": 385.2,
+            "population_density": 1255.1,
+            "sanitation_index": 65.8,
+            "healthcare_access": 72.3,
+            "prediction_accuracy": 0.91
+        },
+        {
+            "month": "Maret",
+            "year": 2023,
+            "total_cases": 22145,
+            "most_influential_factor": "Curah Hujan",
+            "factor_importance": 0.91,
+            "secondary_factor": "Kelembaban",
+            "secondary_importance": 0.78,
+            "tertiary_factor": "Suhu",
+            "tertiary_importance": 0.62,
+            "temperature_avg": 29.1,
+            "humidity_avg": 86.3,
+            "rainfall_mm": 410.8,
+            "population_density": 1260.2,
+            "sanitation_index": 66.1,
+            "healthcare_access": 72.5,
+            "prediction_accuracy": 0.89
+        },
+        {
+            "month": "April",
+            "year": 2023,
+            "total_cases": 19876,
+            "most_influential_factor": "Kelembaban",
+            "factor_importance": 0.82,
+            "secondary_factor": "Curah Hujan",
+            "secondary_importance": 0.79,
+            "tertiary_factor": "Kepadatan Penduduk",
+            "tertiary_importance": 0.71,
+            "temperature_avg": 29.8,
+            "humidity_avg": 82.1,
+            "rainfall_mm": 280.3,
+            "population_density": 1265.4,
+            "sanitation_index": 66.5,
+            "healthcare_access": 73.1,
+            "prediction_accuracy": 0.90
+        },
+        {
+            "month": "Mei",
+            "year": 2023,
+            "total_cases": 14523,
+            "most_influential_factor": "Kepadatan Penduduk",
+            "factor_importance": 0.76,
+            "secondary_factor": "Sanitasi Lingkungan",
+            "secondary_importance": 0.72,
+            "tertiary_factor": "Akses Kesehatan",
+            "tertiary_importance": 0.65,
+            "temperature_avg": 30.2,
+            "humidity_avg": 78.5,
+            "rainfall_mm": 150.2,
+            "population_density": 1270.8,
+            "sanitation_index": 67.2,
+            "healthcare_access": 73.5,
+            "prediction_accuracy": 0.88
+        },
+        {
+            "month": "Juni",
+            "year": 2023,
+            "total_cases": 11234,
+            "most_influential_factor": "Sanitasi Lingkungan",
+            "factor_importance": 0.78,
+            "secondary_factor": "Kepadatan Penduduk",
+            "secondary_importance": 0.74,
+            "tertiary_factor": "Akses Kesehatan",
+            "tertiary_importance": 0.69,
+            "temperature_avg": 29.5,
+            "humidity_avg": 75.2,
+            "rainfall_mm": 85.6,
+            "population_density": 1275.3,
+            "sanitation_index": 67.8,
+            "healthcare_access": 74.2,
+            "prediction_accuracy": 0.87
+        },
+        {
+            "month": "Juli",
+            "year": 2023,
+            "total_cases": 9876,
+            "most_influential_factor": "Kepadatan Penduduk",
+            "factor_importance": 0.81,
+            "secondary_factor": "Sanitasi Lingkungan",
+            "secondary_importance": 0.76,
+            "tertiary_factor": "Akses Kesehatan",
+            "tertiary_importance": 0.71,
+            "temperature_avg": 28.8,
+            "humidity_avg": 72.3,
+            "rainfall_mm": 45.2,
+            "population_density": 1280.1,
+            "sanitation_index": 68.2,
+            "healthcare_access": 74.8,
+            "prediction_accuracy": 0.86
+        },
+        {
+            "month": "Agustus",
+            "year": 2023,
+            "total_cases": 8654,
+            "most_influential_factor": "Kepadatan Penduduk",
+            "factor_importance": 0.83,
+            "secondary_factor": "Sanitasi Lingkungan",
+            "secondary_importance": 0.78,
+            "tertiary_factor": "Suhu",
+            "tertiary_importance": 0.68,
+            "temperature_avg": 28.2,
+            "humidity_avg": 70.5,
+            "rainfall_mm": 32.1,
+            "population_density": 1285.6,
+            "sanitation_index": 68.8,
+            "healthcare_access": 75.3,
+            "prediction_accuracy": 0.85
+        },
+        {
+            "month": "September",
+            "year": 2023,
+            "total_cases": 10234,
+            "most_influential_factor": "Suhu",
+            "factor_importance": 0.79,
+            "secondary_factor": "Kepadatan Penduduk",
+            "secondary_importance": 0.75,
+            "tertiary_factor": "Kelembaban",
+            "tertiary_importance": 0.70,
+            "temperature_avg": 29.5,
+            "humidity_avg": 73.8,
+            "rainfall_mm": 62.5,
+            "population_density": 1290.2,
+            "sanitation_index": 69.2,
+            "healthcare_access": 75.8,
+            "prediction_accuracy": 0.88
+        },
+        {
+            "month": "Oktober",
+            "year": 2023,
+            "total_cases": 13567,
+            "most_influential_factor": "Curah Hujan",
+            "factor_importance": 0.82,
+            "secondary_factor": "Kelembaban",
+            "secondary_importance": 0.76,
+            "tertiary_factor": "Suhu",
+            "tertiary_importance": 0.72,
+            "temperature_avg": 30.1,
+            "humidity_avg": 78.2,
+            "rainfall_mm": 185.3,
+            "population_density": 1295.1,
+            "sanitation_index": 69.8,
+            "healthcare_access": 76.2,
+            "prediction_accuracy": 0.89
+        },
+        {
+            "month": "November",
+            "year": 2023,
+            "total_cases": 16789,
+            "most_influential_factor": "Curah Hujan",
+            "factor_importance": 0.86,
+            "secondary_factor": "Kelembaban",
+            "secondary_importance": 0.80,
+            "tertiary_factor": "Kepadatan Penduduk",
+            "tertiary_importance": 0.73,
+            "temperature_avg": 29.8,
+            "humidity_avg": 82.5,
+            "rainfall_mm": 285.6,
+            "population_density": 1300.5,
+            "sanitation_index": 70.2,
+            "healthcare_access": 76.8,
+            "prediction_accuracy": 0.91
+        },
+        {
+            "month": "Desember",
+            "year": 2023,
+            "total_cases": 19234,
+            "most_influential_factor": "Curah Hujan",
+            "factor_importance": 0.89,
+            "secondary_factor": "Kelembaban",
+            "secondary_importance": 0.82,
+            "tertiary_factor": "Kepadatan Penduduk",
+            "tertiary_importance": 0.75,
+            "temperature_avg": 28.6,
+            "humidity_avg": 86.8,
+            "rainfall_mm": 365.2,
+            "population_density": 1305.8,
+            "sanitation_index": 70.5,
+            "healthcare_access": 77.2,
+            "prediction_accuracy": 0.92
+        }
+    ],
+    "factor_summary": {
+        "factors": [
+            {
+                "name": "Curah Hujan",
+                "avg_importance": 0.85,
+                "description": "Tingkat curah hujan bulanan dalam mm. Faktor utama dalam penyebaran DBD karena nyamuk Aedes berkembang biak di genangan air."
+            },
+            {
+                "name": "Kelembaban",
+                "avg_importance": 0.76,
+                "description": "Tingkat kelembaban rata-rata dalam persen. Mempengaruhi kelangsungan hidup nyamuk dewasa."
+            },
+            {
+                "name": "Kepadatan Penduduk",
+                "avg_importance": 0.74,
+                "description": "Jumlah penduduk per km². Area padat penduduk meningkatkan risiko penularan DBD."
+            },
+            {
+                "name": "Sanitasi Lingkungan",
+                "avg_importance": 0.72,
+                "description": "Indeks kebersihan dan pengelolaan sampah. Lingkungan kotor menjadi tempat berkembang biak nyamuk."
+            },
+            {
+                "name": "Suhu",
+                "avg_importance": 0.68,
+                "description": "Suhu rata-rata dalam Celsius. Suhu optimal untuk nyamuk Aedes adalah 25-30°C."
+            },
+            {
+                "name": "Akses Kesehatan",
+                "avg_importance": 0.65,
+                "description": "Indeks akses ke fasilitas kesehatan. Mempengaruhi tingkat pelaporan dan penanganan kasus."
+            }
+        ]
+    },
+    "model_info": {
+        "model_type": "Random Forest Regressor",
+        "features_used": ["rainfall", "humidity", "temperature", "population_density", "sanitation_index", "healthcare_access"],
+        "training_accuracy": 0.94,
+        "test_accuracy": 0.89,
+        "cross_validation_score": 0.91,
+        "total_data_points": 1500,
+        "training_period": "2018-2023"
+    },
+    "regional_data": [
+        {
+            "province": "DKI Jakarta",
+            "total_cases_2023": 8542,
+            "dominant_factor": "Kepadatan Penduduk",
+            "factor_importance": 0.91,
+            "population_density": 15900,
+            "avg_rainfall": 180.5
+        },
+        {
+            "province": "Jawa Barat",
+            "total_cases_2023": 25678,
+            "dominant_factor": "Curah Hujan",
+            "factor_importance": 0.87,
+            "population_density": 1410,
+            "avg_rainfall": 285.3
+        },
+        {
+            "province": "Jawa Tengah",
+            "total_cases_2023": 18934,
+            "dominant_factor": "Curah Hujan",
+            "factor_importance": 0.85,
+            "population_density": 1058,
+            "avg_rainfall": 265.8
+        },
+        {
+            "province": "Jawa Timur",
+            "total_cases_2023": 21456,
+            "dominant_factor": "Kelembaban",
+            "factor_importance": 0.83,
+            "population_density": 832,
+            "avg_rainfall": 225.6
+        },
+        {
+            "province": "Bali",
+            "total_cases_2023": 6789,
+            "dominant_factor": "Sanitasi Lingkungan",
+            "factor_importance": 0.79,
+            "population_density": 745,
+            "avg_rainfall": 195.2
+        },
+        {
+            "province": "Sulawesi Selatan",
+            "total_cases_2023": 9234,
+            "dominant_factor": "Curah Hujan",
+            "factor_importance": 0.86,
+            "population_density": 195,
+            "avg_rainfall": 310.5
+        },
+        {
+            "province": "Sumatera Utara",
+            "total_cases_2023": 12567,
+            "dominant_factor": "Kelembaban",
+            "factor_importance": 0.84,
+            "population_density": 205,
+            "avg_rainfall": 295.8
+        },
+        {
+            "province": "Kalimantan Timur",
+            "total_cases_2023": 5432,
+            "dominant_factor": "Curah Hujan",
+            "factor_importance": 0.88,
+            "population_density": 31,
+            "avg_rainfall": 325.4
+        }
+    ]
+}
