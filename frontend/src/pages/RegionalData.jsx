@@ -1,0 +1,158 @@
+import { useState, useEffect } from 'react';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts';
+import { getRegionalData } from '../services/api';
+import Loading from '../components/Loading';
+import ErrorMessage from '../components/ErrorMessage';
+
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
+
+function RegionalData() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const result = await getRegionalData();
+        setData(result);
+      } catch (err) {
+        setError('Gagal memuat data regional. Pastikan backend berjalan.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage message={error} />;
+
+  const barChartData = data.map((item) => ({
+    province: item.province,
+    cases: item.total_cases_2023,
+    importance: item.factor_importance * 100,
+  }));
+
+  const pieChartData = data.map((item) => ({
+    name: item.province,
+    value: item.total_cases_2023,
+  }));
+
+  return (
+    <div className="regional-data">
+      <h2 className="page-title">Data Regional per Provinsi</h2>
+      <p className="page-subtitle">
+        Analisis kasus DBD dan faktor dominan untuk setiap provinsi di Indonesia
+      </p>
+
+      <div className="charts-grid">
+        <div className="chart-container">
+          <h3>Kasus DBD per Provinsi 2023</h3>
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={barChartData} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis dataKey="province" type="category" width={120} />
+              <Tooltip formatter={(value) => value.toLocaleString()} />
+              <Legend />
+              <Bar dataKey="cases" name="Total Kasus" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="chart-container">
+          <h3>Distribusi Kasus per Provinsi</h3>
+          <ResponsiveContainer width="100%" height={350}>
+            <PieChart>
+              <Pie
+                data={pieChartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                outerRadius={120}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {pieChartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => value.toLocaleString()} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div className="table-container">
+        <h3>Detail Data Regional</h3>
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Provinsi</th>
+              <th>Total Kasus 2023</th>
+              <th>Faktor Dominan</th>
+              <th>Factor Importance</th>
+              <th>Kepadatan Penduduk</th>
+              <th>Curah Hujan Rata-rata</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item) => (
+              <tr key={item.province}>
+                <td>{item.province}</td>
+                <td>{item.total_cases_2023.toLocaleString()}</td>
+                <td>
+                  <span className="factor-badge">{item.dominant_factor}</span>
+                </td>
+                <td>
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${item.factor_importance * 100}%` }}
+                    ></div>
+                    <span>{(item.factor_importance * 100).toFixed(0)}%</span>
+                  </div>
+                </td>
+                <td>{item.population_density.toLocaleString()}/km²</td>
+                <td>{item.avg_rainfall} mm</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="info-section">
+        <h3>📋 Insight Regional</h3>
+        <ul>
+          <li>
+            <strong>Jawa Barat</strong> memiliki kasus tertinggi dengan faktor dominan Curah Hujan
+          </li>
+          <li>
+            <strong>DKI Jakarta</strong> menunjukkan Kepadatan Penduduk sebagai faktor dominan karena urbanisasi tinggi
+          </li>
+          <li>
+            <strong>Kalimantan Timur</strong> memiliki kasus terendah meskipun curah hujan tinggi, kemungkinan karena kepadatan penduduk rendah
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default RegionalData;
