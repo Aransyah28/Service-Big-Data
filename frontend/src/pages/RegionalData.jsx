@@ -17,6 +17,7 @@ import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
+const PIE_LABEL_MIN_PERCENT = 5; // Only show labels for slices above this percentage
 
 function RegionalData() {
   const [data, setData] = useState([]);
@@ -84,7 +85,7 @@ function RegionalData() {
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) => (percent * 100 > 5 ? `${name}: ${(percent * 100).toFixed(0)}%` : '')}
+                label={({ name, percent }) => (percent * 100 > PIE_LABEL_MIN_PERCENT ? `${name}: ${(percent * 100).toFixed(0)}%` : '')}
                 outerRadius={120}
                 fill="#8884d8"
                 dataKey="value"
