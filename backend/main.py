@@ -52,12 +52,8 @@ class MonthlyResult(BaseModel):
     secondary_importance: float
     tertiary_factor: str
     tertiary_importance: float
-    temperature_avg: float
-    humidity_avg: float
     rainfall_mm: float
     population_density: float
-    sanitation_index: float
-    healthcare_access: float
     prediction_accuracy: float
 
 
@@ -195,11 +191,7 @@ async def get_scatter_plot_data(factor: str):
         
         factor_mapping = {
             "rainfall": ("rainfall_mm", "Curah Hujan (mm)"),
-            "humidity": ("humidity_avg", "Kelembaban Rata-rata (%)"),
-            "temperature": ("temperature_avg", "Suhu Rata-rata (°C)"),
-            "population_density": ("population_density", "Kepadatan Penduduk (per km²)"),
-            "sanitation": ("sanitation_index", "Indeks Sanitasi"),
-            "healthcare": ("healthcare_access", "Akses Kesehatan (%)")
+            "population_density": ("population_density", "Kepadatan Penduduk (per km²)")
         }
         
         if factor not in factor_mapping:
@@ -276,16 +268,12 @@ async def get_line_chart_data():
         months = [r["month"] for r in results]
         total_cases = [r["total_cases"] for r in results]
         rainfall = [r["rainfall_mm"] for r in results]
-        humidity = [r["humidity_avg"] for r in results]
-        temperature = [r["temperature_avg"] for r in results]
         
         return {
             "labels": months,
             "datasets": {
                 "total_cases": total_cases,
-                "rainfall": rainfall,
-                "humidity": humidity,
-                "temperature": temperature
+                "rainfall": rainfall
             }
         }
     except FileNotFoundError:

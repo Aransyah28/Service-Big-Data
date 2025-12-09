@@ -160,12 +160,8 @@ class DBDDataProcessor:
                     'secondary_importance': float(factors.iloc[1]) if len(factors) > 1 else 0.0,
                     'tertiary_factor': tertiary_factor,
                     'tertiary_importance': float(factors.iloc[2]) if len(factors) > 2 else 0.0,
-                    'temperature_avg': 28.0 + (month % 4),  # Simulated
-                    'humidity_avg': 75.0 + (month % 3) * 5,  # Simulated
                     'rainfall_mm': avg_rainfall,
                     'population_density': avg_density,
-                    'sanitation_index': 65.0 + (month % 5),  # Simulated
-                    'healthcare_access': 70.0 + (month % 4) * 2,  # Simulated
                     'prediction_accuracy': 0.88 + np.random.uniform(-0.05, 0.05)
                 })
         
