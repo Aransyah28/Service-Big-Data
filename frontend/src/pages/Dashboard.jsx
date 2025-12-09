@@ -64,13 +64,6 @@ function Dashboard() {
     value: factor.avg_importance * 100,
   }));
 
-  const factorFrequencyData = Object.entries(statistics?.dominant_factor_frequency || {}).map(
-    ([name, count]) => ({
-      name,
-      count,
-    })
-  );
-
   return (
     <div className="dashboard">
       <h2 className="page-title">Dashboard Analisis DBD Jawa Barat</h2>
