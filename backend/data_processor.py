@@ -172,7 +172,7 @@ class DBDDataProcessor:
         return monthly_data
     
     def get_regional_data(self, year: int = None) -> List[Dict[str, Any]]:
-        """Get regional data by province"""
+        """Get regional data by kabupaten/kota (districts/cities)"""
         if self.df is None:
             self.load_and_preprocess_data()
         
@@ -182,8 +182,8 @@ class DBDDataProcessor:
         if year:
             df = df[df['tahun'] == year]
         
-        # Group by province
-        regional = df.groupby(['kode_provinsi', 'nama_provinsi']).agg({
+        # Group by kabupaten/kota instead of province
+        regional = df.groupby(['kode_kabupaten_kota', 'nama_kabupaten_kota']).agg({
             'kasus_bulanan': 'sum',
             'kepadatan_penduduk': 'mean',
             'jumlah_curah_hujan': 'mean'
@@ -196,7 +196,7 @@ class DBDDataProcessor:
             factor_importance = float(self.feature_importance['jumlah_curah_hujan']) if self.feature_importance is not None else 0.85
             
             regional_data.append({
-                'province': row['nama_provinsi'],
+                'province': row['nama_kabupaten_kota'],
                 'total_cases_2023': int(row['kasus_bulanan']),
                 'dominant_factor': dominant_factor,
                 'factor_importance': factor_importance,

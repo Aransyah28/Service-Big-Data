@@ -145,6 +145,10 @@ body {
   grid-column: 1 / -1;
 }
 
+.chart-container.pie-chart-large {
+  min-height: 500px;
+}
+
 /* Table Styles */
 .table-container {
   background: white;
