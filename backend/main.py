@@ -5,10 +5,12 @@ This API serves machine learning analysis results for dengue fever cases in Indo
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 import json
 import os
+import pandas as pd
 
 app = FastAPI(
     title="DBD ML Analysis API",
@@ -30,6 +32,8 @@ app.add_middleware(
 
 # Load data from JSON file
 DATA_FILE = os.path.join(os.path.dirname(__file__), "data", "dbd_ml_results.json")
+CSV_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "Kasus_DBD_Gabungan.csv")
+NOTEBOOK_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "DBD_analysis_final.ipynb")
 
 def load_data():
     """Load ML results data from JSON file"""
@@ -102,13 +106,24 @@ async def root():
     return {
         "message": "Selamat datang di API Analisis ML Kasus DBD Indonesia",
         "version": "1.0.0",
+        "description": "API ini menyediakan akses ke data DBD dan hasil analisis Machine Learning",
+        "data_source": {
+            "csv": "Kasus_DBD_Gabungan.csv",
+            "notebook": "DBD_analysis_final.ipynb",
+            "years_covered": "2016-2024"
+        },
         "endpoints": [
             "/api/monthly-results",
             "/api/factor-summary",
             "/api/model-info",
             "/api/regional-data",
             "/api/scatter-plot/{factor}",
-            "/api/statistics"
+            "/api/statistics",
+            "/api/raw-data",
+            "/api/raw-data/summary",
+            "/api/notebook-info",
+            "/api/download/csv",
+            "/api/download/notebook"
         ]
     }
 
@@ -300,6 +315,157 @@ async def get_bar_chart_data():
         }
     except FileNotFoundError:
         raise HTTPException(status_code=500, detail="Data file not found")
+
+
+@app.get("/api/raw-data")
+async def get_raw_data(
+    limit: int = 100,
+    offset: int = 0,
+    province: Optional[str] = None,
+    year: Optional[int] = None
+):
+    """
+    Get raw CSV data with optional filtering
+    - limit: Maximum number of records to return (default 100, max 1000)
+    - offset: Number of records to skip
+    - province: Filter by province name
+    - year: Filter by year
+    """
+    try:
+        # Load CSV
+        df = pd.read_csv(CSV_FILE)
+        
+        # Apply filters
+        if province:
+            df = df[df['nama_provinsi'].str.contains(province, case=False, na=False)]
+        if year:
+            df = df[df['tahun'] == year]
+        
+        # Get total count before pagination
+        total = len(df)
+        
+        # Apply pagination
+        limit = min(limit, 1000)  # Cap at 1000
+        df = df.iloc[offset:offset + limit]
+        
+        # Convert to dict
+        records = df.to_dict('records')
+        
+        return {
+            "total": total,
+            "limit": limit,
+            "offset": offset,
+            "count": len(records),
+            "data": records
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="CSV file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading CSV: {str(e)}")
+
+
+@app.get("/api/raw-data/summary")
+async def get_raw_data_summary():
+    """Get summary statistics of the raw CSV data"""
+    try:
+        df = pd.read_csv(CSV_FILE)
+        
+        return {
+            "total_records": len(df),
+            "years": {
+                "min": int(df['tahun'].min()),
+                "max": int(df['tahun'].max()),
+                "unique": sorted([int(y) for y in df['tahun'].unique()])
+            },
+            "provinces": {
+                "count": int(df['nama_provinsi'].nunique()),
+                "list": sorted(df['nama_provinsi'].unique().tolist())
+            },
+            "districts": {
+                "count": int(df['nama_kabupaten_kota'].nunique())
+            },
+            "cases": {
+                "total": int(df['kasus_bulanan'].sum()),
+                "min": int(df['kasus_bulanan'].min()),
+                "max": int(df['kasus_bulanan'].max()),
+                "mean": float(df['kasus_bulanan'].mean())
+            },
+            "columns": df.columns.tolist()
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="CSV file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading CSV: {str(e)}")
+
+
+@app.get("/api/notebook-info")
+async def get_notebook_info():
+    """Get information about the Jupyter notebook used for analysis"""
+    try:
+        with open(NOTEBOOK_FILE, 'r', encoding='utf-8') as f:
+            notebook = json.load(f)
+        
+        # Extract cell information
+        cells = notebook.get('cells', [])
+        code_cells = [c for c in cells if c.get('cell_type') == 'code']
+        markdown_cells = [c for c in cells if c.get('cell_type') == 'markdown']
+        
+        # Extract imports from first code cell
+        imports = []
+        if code_cells:
+            first_cell_source = ''.join(code_cells[0].get('source', []))
+            imports = [line.strip() for line in first_cell_source.split('\n') if line.strip().startswith('import') or line.strip().startswith('from')]
+        
+        return {
+            "notebook_name": "DBD_analysis_final.ipynb",
+            "description": "Analisis Machine Learning untuk kasus Demam Berdarah Dengue (DBD) di Indonesia",
+            "cells": {
+                "total": len(cells),
+                "code": len(code_cells),
+                "markdown": len(markdown_cells)
+            },
+            "analysis_steps": [
+                "Data Loading & Preprocessing",
+                "Feature Engineering (lag features, rolling means)",
+                "Feature Selection (Mutual Information, RFE, Wrapper Methods)",
+                "Model Training (Random Forest Regressor)",
+                "Feature Importance Analysis",
+                "Model Evaluation"
+            ],
+            "libraries_used": imports[:10],
+            "model": {
+                "type": "Random Forest Regressor",
+                "purpose": "Prediksi kasus DBD berdasarkan curah hujan, kepadatan penduduk, dan faktor lainnya"
+            }
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="Notebook file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading notebook: {str(e)}")
+
+
+@app.get("/api/download/csv")
+async def download_csv():
+    """Download the raw CSV file"""
+    if not os.path.exists(CSV_FILE):
+        raise HTTPException(status_code=404, detail="CSV file not found")
+    return FileResponse(
+        path=CSV_FILE,
+        filename="Kasus_DBD_Gabungan.csv",
+        media_type="text/csv"
+    )
+
+
+@app.get("/api/download/notebook")
+async def download_notebook():
+    """Download the Jupyter notebook file"""
+    if not os.path.exists(NOTEBOOK_FILE):
+        raise HTTPException(status_code=404, detail="Notebook file not found")
+    return FileResponse(
+        path=NOTEBOOK_FILE,
+        filename="DBD_analysis_final.ipynb",
+        media_type="application/x-ipynb+json"
+    )
 
 
 if __name__ == "__main__":
