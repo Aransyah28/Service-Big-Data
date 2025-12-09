@@ -21,11 +21,7 @@ import ErrorMessage from '../components/ErrorMessage';
 
 const FACTORS = [
   { id: 'rainfall', name: 'Curah Hujan' },
-  { id: 'humidity', name: 'Kelembaban' },
-  { id: 'temperature', name: 'Suhu' },
   { id: 'population_density', name: 'Kepadatan Penduduk' },
-  { id: 'sanitation', name: 'Sanitasi' },
-  { id: 'healthcare', name: 'Akses Kesehatan' },
 ];
 
 function Visualizations() {
@@ -71,8 +67,6 @@ function Visualizations() {
     month: label,
     cases: lineData.datasets.total_cases[i],
     rainfall: lineData.datasets.rainfall[i],
-    humidity: lineData.datasets.humidity[i],
-    temperature: lineData.datasets.temperature[i],
   }));
 
   const barChartData = barData?.labels.map((label, i) => ({
@@ -171,13 +165,6 @@ function Visualizations() {
                 dataKey="rainfall"
                 stroke="#82ca9d"
                 name="Curah Hujan (mm)"
-              />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="humidity"
-                stroke="#ffc658"
-                name="Kelembaban (%)"
               />
             </LineChart>
           </ResponsiveContainer>

@@ -10,13 +10,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 29.0,
-            "humidity_avg": 80.0,
             "rainfall_mm": 80.625,
             "population_density": 255.3454074074074,
-            "sanitation_index": 66.0,
-            "healthcare_access": 72.0,
-            "prediction_accuracy": 0.8327739694265506
+            "prediction_accuracy": 0.9275920605518118
         },
         {
             "month": "Februari",
@@ -28,13 +24,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 30.0,
-            "humidity_avg": 85.0,
             "rainfall_mm": 56.32,
             "population_density": 255.3454074074074,
-            "sanitation_index": 67.0,
-            "healthcare_access": 74.0,
-            "prediction_accuracy": 0.8856604770402429
+            "prediction_accuracy": 0.8520736410848072
         },
         {
             "month": "Maret",
@@ -46,13 +38,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 31.0,
-            "humidity_avg": 75.0,
             "rainfall_mm": 60.67000000000001,
             "population_density": 255.3454074074074,
-            "sanitation_index": 68.0,
-            "healthcare_access": 76.0,
-            "prediction_accuracy": 0.910909212067057
+            "prediction_accuracy": 0.8446970104682512
         },
         {
             "month": "April",
@@ -64,13 +52,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 28.0,
-            "humidity_avg": 80.0,
             "rainfall_mm": 72.72499999999998,
             "population_density": 255.3454074074074,
-            "sanitation_index": 69.0,
-            "healthcare_access": 70.0,
-            "prediction_accuracy": 0.8301653345835629
+            "prediction_accuracy": 0.8893687552158276
         },
         {
             "month": "Mei",
@@ -82,13 +66,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 29.0,
-            "humidity_avg": 85.0,
             "rainfall_mm": 37.32500000000001,
             "population_density": 255.3454074074074,
-            "sanitation_index": 65.0,
-            "healthcare_access": 72.0,
-            "prediction_accuracy": 0.9119229209900295
+            "prediction_accuracy": 0.8885364075269174
         },
         {
             "month": "Juni",
@@ -100,13 +80,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 30.0,
-            "humidity_avg": 75.0,
             "rainfall_mm": 108.955,
             "population_density": 255.3454074074074,
-            "sanitation_index": 66.0,
-            "healthcare_access": 74.0,
-            "prediction_accuracy": 0.8315943187405243
+            "prediction_accuracy": 0.865538508361961
         },
         {
             "month": "Juli",
@@ -118,13 +94,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 31.0,
-            "humidity_avg": 80.0,
             "rainfall_mm": 37.24,
             "population_density": 255.3454074074074,
-            "sanitation_index": 67.0,
-            "healthcare_access": 76.0,
-            "prediction_accuracy": 0.8981421285296682
+            "prediction_accuracy": 0.840472617177576
         },
         {
             "month": "Agustus",
@@ -136,13 +108,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 28.0,
-            "humidity_avg": 85.0,
             "rainfall_mm": 18.490000000000002,
             "population_density": 255.3454074074074,
-            "sanitation_index": 68.0,
-            "healthcare_access": 70.0,
-            "prediction_accuracy": 0.9169776490283724
+            "prediction_accuracy": 0.9078469957356723
         },
         {
             "month": "September",
@@ -154,13 +122,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 29.0,
-            "humidity_avg": 75.0,
             "rainfall_mm": 69.17499999999998,
             "population_density": 255.3454074074074,
-            "sanitation_index": 69.0,
-            "healthcare_access": 72.0,
-            "prediction_accuracy": 0.8444969466612327
+            "prediction_accuracy": 0.8998797093108416
         },
         {
             "month": "Oktober",
@@ -172,13 +136,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 30.0,
-            "humidity_avg": 80.0,
             "rainfall_mm": 47.79473684210528,
             "population_density": 255.3454074074074,
-            "sanitation_index": 65.0,
-            "healthcare_access": 74.0,
-            "prediction_accuracy": 0.8578250509253312
+            "prediction_accuracy": 0.8312666902539234
         },
         {
             "month": "November",
@@ -190,13 +150,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 31.0,
-            "humidity_avg": 85.0,
             "rainfall_mm": 81.77000000000001,
             "population_density": 255.3454074074074,
-            "sanitation_index": 66.0,
-            "healthcare_access": 76.0,
-            "prediction_accuracy": 0.889938543571995
+            "prediction_accuracy": 0.8958957765684298
         },
         {
             "month": "Desember",
@@ -208,13 +164,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "temperature_avg": 28.0,
-            "humidity_avg": 75.0,
             "rainfall_mm": 65.07000000000001,
             "population_density": 255.3454074074074,
-            "sanitation_index": 67.0,
-            "healthcare_access": 70.0,
-            "prediction_accuracy": 0.8456479214509027
+            "prediction_accuracy": 0.8823157463195369
         }
     ],
     "model_info": {

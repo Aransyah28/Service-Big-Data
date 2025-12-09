@@ -3,7 +3,7 @@ import { getMonthlyResults } from '../services/api';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
-const POPULATION_DENSITY_DIVISOR = 1000000; // Convert to millions
+
 
 function MonthlyData() {
   const [data, setData] = useState([]);
@@ -115,17 +115,13 @@ function MonthlyData() {
                   <div className="detail-section">
                     <h4>🌡️ Data Lingkungan</h4>
                     <ul>
-                      <li>Suhu Rata-rata: <strong>{item.temperature_avg}°C</strong></li>
-                      <li>Kelembaban: <strong>{item.humidity_avg}%</strong></li>
                       <li>Curah Hujan: <strong>{item.rainfall_mm.toFixed(1)} mm</strong></li>
                     </ul>
                   </div>
                   <div className="detail-section">
                     <h4>👥 Data Demografis</h4>
                     <ul>
-                      <li>Kepadatan Penduduk: <strong>{(item.population_density / POPULATION_DENSITY_DIVISOR).toFixed(0)} juta/km²</strong></li>
-                      <li>Indeks Sanitasi: <strong>{item.sanitation_index}</strong></li>
-                      <li>Akses Kesehatan: <strong>{item.healthcare_access}%</strong></li>
+                      <li>Kepadatan Penduduk: <strong>{item.population_density.toFixed(0)}/km²</strong></li>
                     </ul>
                   </div>
                 </div>
