@@ -73,14 +73,14 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <h2 className="page-title">Dashboard Analisis DBD Indonesia</h2>
+      <h2 className="page-title">Dashboard Analisis DBD Jawa Barat</h2>
       <p className="page-subtitle">
         Hasil analisis Machine Learning untuk faktor-faktor yang mempengaruhi kasus Demam Berdarah Dengue
       </p>
 
       <div className="stats-grid">
         <StatCard
-          title="Total Kasus 2023"
+          title="Total Kasus 2024"
           value={statistics?.total_cases_2023?.toLocaleString()}
           icon="📊"
         />
@@ -112,7 +112,7 @@ function Dashboard() {
 
       <div className="charts-grid">
         <div className="chart-container">
-          <h3>Tren Kasus DBD Bulanan 2023</h3>
+          <h3>Tren Kasus DBD Bulanan 2024</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -141,17 +141,17 @@ function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div className="chart-container">
+        <div className="chart-container pie-chart-large">
           <h3>Distribusi Importance Faktor</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={400}>
             <PieChart>
               <Pie
                 data={pieData}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
+                labelLine={true}
                 label={({ name, value }) => `${name}: ${value.toFixed(0)}%`}
-                outerRadius={100}
+                outerRadius={120}
                 fill="#8884d8"
                 dataKey="value"
               >
@@ -160,21 +160,8 @@ function Dashboard() {
                 ))}
               </Pie>
               <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="chart-container full-width">
-          <h3>Frekuensi Faktor Dominan per Bulan</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={factorFrequencyData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
               <Legend />
-              <Bar dataKey="count" name="Jumlah Bulan" fill="#8884d8" />
-            </BarChart>
+            </PieChart>
           </ResponsiveContainer>
         </div>
       </div>

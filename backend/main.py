@@ -175,7 +175,7 @@ async def get_model_info():
 
 @app.get("/api/regional-data", response_model=List[RegionalData])
 async def get_regional_data():
-    """Get regional DBD data by province"""
+    """Get regional DBD data by kabupaten/kota (districts/cities)"""
     try:
         data = load_data()
         return data["regional_data"]

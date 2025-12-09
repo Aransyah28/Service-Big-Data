@@ -115,13 +115,13 @@ function MonthlyData() {
                     <ul>
                       <li>Suhu Rata-rata: <strong>{item.temperature_avg}°C</strong></li>
                       <li>Kelembaban: <strong>{item.humidity_avg}%</strong></li>
-                      <li>Curah Hujan: <strong>{item.rainfall_mm} mm</strong></li>
+                      <li>Curah Hujan: <strong>{item.rainfall_mm.toFixed(1)} mm</strong></li>
                     </ul>
                   </div>
                   <div className="detail-section">
                     <h4>👥 Data Demografis</h4>
                     <ul>
-                      <li>Kepadatan Penduduk: <strong>{item.population_density}/km²</strong></li>
+                      <li>Kepadatan Penduduk: <strong>{(item.population_density / 1000000).toFixed(0)} juta/km²</strong></li>
                       <li>Indeks Sanitasi: <strong>{item.sanitation_index}</strong></li>
                       <li>Akses Kesehatan: <strong>{item.healthcare_access}%</strong></li>
                     </ul>

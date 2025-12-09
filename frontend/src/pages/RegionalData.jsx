@@ -55,19 +55,19 @@ function RegionalData() {
 
   return (
     <div className="regional-data">
-      <h2 className="page-title">Data Regional per Provinsi</h2>
+      <h2 className="page-title">Data Regional per Kabupaten/Kota</h2>
       <p className="page-subtitle">
-        Analisis kasus DBD dan faktor dominan untuk setiap provinsi di Indonesia
+        Analisis kasus DBD dan faktor dominan untuk setiap kabupaten/kota di Jawa Barat
       </p>
 
       <div className="charts-grid">
         <div className="chart-container">
-          <h3>Kasus DBD per Provinsi 2023</h3>
-          <ResponsiveContainer width="100%" height={350}>
+          <h3>Kasus DBD per Kabupaten/Kota 2024</h3>
+          <ResponsiveContainer width="100%" height={500}>
             <BarChart data={barChartData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" />
-              <YAxis dataKey="province" type="category" width={120} />
+              <YAxis dataKey="province" type="category" width={150} />
               <Tooltip formatter={(value) => value.toLocaleString()} />
               <Legend />
               <Bar dataKey="cases" name="Total Kasus" fill="#8884d8" />
@@ -76,15 +76,15 @@ function RegionalData() {
         </div>
 
         <div className="chart-container">
-          <h3>Distribusi Kasus per Provinsi</h3>
-          <ResponsiveContainer width="100%" height={350}>
+          <h3>Distribusi Kasus per Kabupaten/Kota</h3>
+          <ResponsiveContainer width="100%" height={500}>
             <PieChart>
               <Pie
                 data={pieChartData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) => (percent * 100 > 5 ? `${name}: ${(percent * 100).toFixed(0)}%` : '')}
                 outerRadius={120}
                 fill="#8884d8"
                 dataKey="value"
@@ -104,8 +104,8 @@ function RegionalData() {
         <table className="data-table">
           <thead>
             <tr>
-              <th>Provinsi</th>
-              <th>Total Kasus 2023</th>
+              <th>Kabupaten/Kota</th>
+              <th>Total Kasus 2024</th>
               <th>Faktor Dominan</th>
               <th>Factor Importance</th>
               <th>Kepadatan Penduduk</th>
@@ -130,7 +130,7 @@ function RegionalData() {
                   </div>
                 </td>
                 <td>{item.population_density.toLocaleString()}/km²</td>
-                <td>{item.avg_rainfall} mm</td>
+                <td>{item.avg_rainfall.toFixed(1)} mm</td>
               </tr>
             ))}
           </tbody>
@@ -141,13 +141,13 @@ function RegionalData() {
         <h3>📋 Insight Regional</h3>
         <ul>
           <li>
-            <strong>Jawa Barat</strong> memiliki kasus tertinggi dengan faktor dominan Curah Hujan
+            Data menunjukkan variasi kasus DBD di berbagai kabupaten/kota di Jawa Barat
           </li>
           <li>
-            <strong>DKI Jakarta</strong> menunjukkan Kepadatan Penduduk sebagai faktor dominan karena urbanisasi tinggi
+            <strong>Curah Hujan</strong> merupakan faktor dominan yang mempengaruhi kasus DBD di sebagian besar wilayah
           </li>
           <li>
-            <strong>Kalimantan Timur</strong> memiliki kasus terendah meskipun curah hujan tinggi, kemungkinan karena kepadatan penduduk rendah
+            Kepadatan penduduk juga berperan penting dalam penyebaran kasus DBD di wilayah urban
           </li>
         </ul>
       </div>

@@ -100,7 +100,7 @@ function Visualizations() {
     <div className="visualizations">
       <h2 className="page-title">Visualisasi Data ML</h2>
       <p className="page-subtitle">
-        Berbagai visualisasi untuk memahami korelasi faktor dengan kasus DBD
+        Visualisasi hasil analisis menggunakan Random Forest Regressor dengan feature selection (Mutual Information, RFE, Lasso/Ridge)
       </p>
 
       <div className="visualization-section">
@@ -209,7 +209,11 @@ function Visualizations() {
       </div>
 
       <div className="visualization-section">
-        <h3>📊 Factor Importance per Bulan</h3>
+        <h3>📊 Random Forest Feature Importance per Bulan</h3>
+        <p style={{ color: '#666', marginBottom: '1rem' }}>
+          Feature importance dihitung menggunakan Random Forest Regressor (n_estimators=250) 
+          dengan validasi melalui RFE (Recursive Feature Elimination) dan embedded methods (Lasso/Ridge)
+        </p>
         <div className="chart-container">
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={barChartData}>
