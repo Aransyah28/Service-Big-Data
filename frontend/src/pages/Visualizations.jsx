@@ -129,7 +129,7 @@ function Visualizations() {
 
   const populationChartData = populationScatterData?.series.map((series, index) => ({
     name: series.name,
-    data: series.data,
+    data: series.data.map(point => ({ ...point, name: series.name })),
     color: COLORS[index % COLORS.length]
   }));
 
@@ -247,7 +247,10 @@ function Visualizations() {
                 label={{ value: 'Kasus Bulanan', angle: -90, position: 'insideLeft' }}
               />
               <Tooltip content={<RainfallTooltip />} />
-              <Legend />
+              <Legend 
+                verticalAlign="top"
+                height={36}
+              />
               <Scatter
                 name={`${selectedRegion}`}
                 data={rainfallChartData}
