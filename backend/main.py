@@ -125,11 +125,20 @@ async def root():
 
 
 @app.get("/api/monthly-results", response_model=List[MonthlyResult])
-async def get_monthly_results():
-    """Get all monthly ML analysis results"""
+async def get_monthly_results(year: Optional[int] = None):
+    """Get all monthly ML analysis results, optionally filtered by year"""
     try:
-        data = load_data()
-        return data["dbd_ml_results"]
+        if year:
+            # Generate data dynamically for requested year
+            from data_processor import DBDDataProcessor
+            processor = DBDDataProcessor(CSV_FILE)
+            processor.load_and_preprocess_data()
+            processor.train_model()
+            return processor.get_monthly_aggregated_data(year)
+        else:
+            # Return cached data
+            data = load_data()
+            return data["dbd_ml_results"]
     except FileNotFoundError:
         raise HTTPException(status_code=500, detail="Data file not found")
     except json.JSONDecodeError:
@@ -170,24 +179,41 @@ async def get_model_info():
 
 
 @app.get("/api/regional-data", response_model=List[RegionalData])
-async def get_regional_data():
-    """Get regional DBD data by kabupaten/kota (districts/cities)"""
+async def get_regional_data(year: Optional[int] = None):
+    """Get regional DBD data by kabupaten/kota (districts/cities), optionally filtered by year"""
     try:
-        data = load_data()
-        return data["regional_data"]
+        if year:
+            # Generate data dynamically for requested year
+            from data_processor import DBDDataProcessor
+            processor = DBDDataProcessor(CSV_FILE)
+            processor.load_and_preprocess_data()
+            processor.train_model()
+            return processor.get_regional_data(year)
+        else:
+            # Return cached data
+            data = load_data()
+            return data["regional_data"]
     except FileNotFoundError:
         raise HTTPException(status_code=500, detail="Data file not found")
 
 
 @app.get("/api/scatter-plot/{factor}", response_model=ScatterPlotData)
-async def get_scatter_plot_data(factor: str):
+async def get_scatter_plot_data(factor: str, year: Optional[int] = None):
     """
     Get scatter plot data for a specific factor vs total cases
     Valid factors: rainfall, humidity, temperature, population_density, sanitation, healthcare
     """
     try:
-        data = load_data()
-        results = data["dbd_ml_results"]
+        if year:
+            # Generate data dynamically for requested year
+            from data_processor import DBDDataProcessor
+            processor = DBDDataProcessor(CSV_FILE)
+            processor.load_and_preprocess_data()
+            processor.train_model()
+            results = processor.get_monthly_aggregated_data(year)
+        else:
+            data = load_data()
+            results = data["dbd_ml_results"]
         
         factor_mapping = {
             "rainfall": ("rainfall_mm", "Curah Hujan (mm)"),
@@ -211,7 +237,7 @@ async def get_scatter_plot_data(factor: str):
             y=y_values,
             labels=labels,
             x_label=label,
-            y_label="Total Kasus DBD"
+            y_label="Kasus Bulanan"
         )
     except FileNotFoundError:
         raise HTTPException(status_code=500, detail="Data file not found")
@@ -259,11 +285,19 @@ async def get_statistics():
 
 
 @app.get("/api/line-chart-data")
-async def get_line_chart_data():
+async def get_line_chart_data(year: Optional[int] = None):
     """Get data formatted for line chart visualization"""
     try:
-        data = load_data()
-        results = data["dbd_ml_results"]
+        if year:
+            # Generate data dynamically for requested year
+            from data_processor import DBDDataProcessor
+            processor = DBDDataProcessor(CSV_FILE)
+            processor.load_and_preprocess_data()
+            processor.train_model()
+            results = processor.get_monthly_aggregated_data(year)
+        else:
+            data = load_data()
+            results = data["dbd_ml_results"]
         
         months = [r["month"] for r in results]
         total_cases = [r["total_cases"] for r in results]
@@ -281,11 +315,19 @@ async def get_line_chart_data():
 
 
 @app.get("/api/bar-chart-data")
-async def get_bar_chart_data():
+async def get_bar_chart_data(year: Optional[int] = None):
     """Get data formatted for bar chart showing factor importance per month"""
     try:
-        data = load_data()
-        results = data["dbd_ml_results"]
+        if year:
+            # Generate data dynamically for requested year
+            from data_processor import DBDDataProcessor
+            processor = DBDDataProcessor(CSV_FILE)
+            processor.load_and_preprocess_data()
+            processor.train_model()
+            results = processor.get_monthly_aggregated_data(year)
+        else:
+            data = load_data()
+            results = data["dbd_ml_results"]
         
         months = [r["month"] for r in results]
         primary_importance = [r["factor_importance"] for r in results]
@@ -379,6 +421,24 @@ async def get_raw_data_summary():
                 "mean": float(df['kasus_bulanan'].mean())
             },
             "columns": df.columns.tolist()
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="CSV file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading CSV: {str(e)}")
+
+
+@app.get("/api/available-years")
+async def get_available_years():
+    """Get list of available years in the dataset"""
+    try:
+        df = pd.read_csv(CSV_FILE)
+        years = sorted([int(y) for y in df['tahun'].unique()])
+        return {
+            "years": years,
+            "min": min(years),
+            "max": max(years),
+            "default": max(years)  # Use most recent year as default
         }
     except FileNotFoundError:
         raise HTTPException(status_code=500, detail="CSV file not found")

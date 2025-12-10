@@ -12,7 +12,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 80.625,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.9275920605518118
+            "prediction_accuracy": 0.8126292262030923
         },
         {
             "month": "Februari",
@@ -26,7 +26,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 56.32,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8520736410848072
+            "prediction_accuracy": 0.7965215252278772
         },
         {
             "month": "Maret",
@@ -40,7 +40,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 60.67000000000001,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8446970104682512
+            "prediction_accuracy": 0.8042389587014682
         },
         {
             "month": "April",
@@ -54,7 +54,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 72.72499999999998,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8893687552158276
+            "prediction_accuracy": 0.827269753735386
         },
         {
             "month": "Mei",
@@ -68,7 +68,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 37.32500000000001,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8885364075269174
+            "prediction_accuracy": 0.7763002475777359
         },
         {
             "month": "Juni",
@@ -82,7 +82,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 108.955,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.865538508361961
+            "prediction_accuracy": 0.7910977958932626
         },
         {
             "month": "Juli",
@@ -96,7 +96,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 37.24,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.840472617177576
+            "prediction_accuracy": 0.8211400580418072
         },
         {
             "month": "Agustus",
@@ -110,7 +110,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 18.490000000000002,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.9078469957356723
+            "prediction_accuracy": 0.8228335870422385
         },
         {
             "month": "September",
@@ -124,7 +124,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 69.17499999999998,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8998797093108416
+            "prediction_accuracy": 0.8212980611103405
         },
         {
             "month": "Oktober",
@@ -138,7 +138,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 47.79473684210528,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8312666902539234
+            "prediction_accuracy": 0.7805347832694062
         },
         {
             "month": "November",
@@ -152,7 +152,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 81.77000000000001,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8958957765684298
+            "prediction_accuracy": 0.7765006694878229
         },
         {
             "month": "Desember",
@@ -166,7 +166,7 @@
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 65.07000000000001,
             "population_density": 255.3454074074074,
-            "prediction_accuracy": 0.8823157463195369
+            "prediction_accuracy": 0.8287443723049185
         }
     ],
     "model_info": {

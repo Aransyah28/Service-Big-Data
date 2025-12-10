@@ -10,8 +10,9 @@ const api = axios.create({
   },
 });
 
-export const getMonthlyResults = async () => {
-  const response = await api.get('/api/monthly-results');
+export const getMonthlyResults = async (year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/monthly-results', { params });
   return response.data;
 };
 
@@ -30,13 +31,15 @@ export const getModelInfo = async () => {
   return response.data;
 };
 
-export const getRegionalData = async () => {
-  const response = await api.get('/api/regional-data');
+export const getRegionalData = async (year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/regional-data', { params });
   return response.data;
 };
 
-export const getScatterPlotData = async (factor) => {
-  const response = await api.get(`/api/scatter-plot/${factor}`);
+export const getScatterPlotData = async (factor, year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get(`/api/scatter-plot/${factor}`, { params });
   return response.data;
 };
 
@@ -45,13 +48,20 @@ export const getStatistics = async () => {
   return response.data;
 };
 
-export const getLineChartData = async () => {
-  const response = await api.get('/api/line-chart-data');
+export const getLineChartData = async (year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/line-chart-data', { params });
   return response.data;
 };
 
-export const getBarChartData = async () => {
-  const response = await api.get('/api/bar-chart-data');
+export const getBarChartData = async (year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/bar-chart-data', { params });
+  return response.data;
+};
+
+export const getAvailableYears = async () => {
+  const response = await api.get('/api/available-years');
   return response.data;
 };
 
