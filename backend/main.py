@@ -513,7 +513,7 @@ async def get_rainfall_scatter_by_region(region: str, year: Optional[int] = None
         
         x_values = df_region['jumlah_curah_hujan'].fillna(0).tolist()
         y_values = df_region['kasus_bulanan'].fillna(0).astype(int).tolist()
-        labels = [f"{month_names[int(m)-1]} {int(y)}" if pd.notna(m) else "N/A" 
+        labels = [f"{month_names[int(m)-1]} {int(y)}" if pd.notna(m) and 1 <= int(m) <= 12 else "N/A" 
                   for m, y in zip(df_region['bulan'], df_region['tahun'])]
         
         return ScatterPlotData(

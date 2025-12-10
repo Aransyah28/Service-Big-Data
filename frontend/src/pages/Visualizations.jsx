@@ -27,11 +27,6 @@ import {
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
-const FACTORS = [
-  { id: 'rainfall', name: 'Curah Hujan' },
-  { id: 'population_density', name: 'Kepadatan Penduduk' },
-];
-
 // Color palette for different regions
 const COLORS = [
   '#8884d8', '#82ca9d', '#ffc658', '#ff7c7c', '#8dd1e1', '#d084d0',
@@ -173,6 +168,8 @@ function Visualizations() {
   const PopulationTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
+      const xValue = data.x ?? data.payload?.x ?? 0;
+      const yValue = data.y ?? data.payload?.y ?? 0;
       return (
         <div className="custom-tooltip" style={{ 
           backgroundColor: 'white', 
@@ -181,8 +178,8 @@ function Visualizations() {
           borderRadius: '4px'
         }}>
           <p className="label" style={{ fontWeight: 'bold' }}>{data.name || 'Region'}</p>
-          <p>{`Kepadatan Penduduk: ${data.x?.toFixed(2) || data.payload?.x?.toFixed(2)} per km²`}</p>
-          <p>{`Total Kasus: ${(data.y || data.payload?.y)?.toLocaleString()}`}</p>
+          <p>{`Kepadatan Penduduk: ${xValue.toFixed(2)} per km²`}</p>
+          <p>{`Total Kasus: ${yValue.toLocaleString()}`}</p>
         </div>
       );
     }
