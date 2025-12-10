@@ -10,9 +10,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 80.625,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7799932985468265
+            "rainfall_mm": 80.62,
+            "population_density": 255,
+            "prediction_accuracy": 0.7885058330406288
         },
         {
             "month": "Februari",
@@ -25,8 +25,8 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 56.32,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.8125213264838236
+            "population_density": 255,
+            "prediction_accuracy": 0.8199010489318005
         },
         {
             "month": "Maret",
@@ -39,8 +39,8 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 60.67,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.824911469864156
+            "population_density": 255,
+            "prediction_accuracy": 0.7976013272290229
         },
         {
             "month": "April",
@@ -52,9 +52,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 72.725,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7941019175559307
+            "rainfall_mm": 72.72,
+            "population_density": 255,
+            "prediction_accuracy": 0.8167805549051884
         },
         {
             "month": "Mei",
@@ -66,9 +66,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 37.325,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7848455712641482
+            "rainfall_mm": 37.33,
+            "population_density": 255,
+            "prediction_accuracy": 0.7740596035738436
         },
         {
             "month": "Juni",
@@ -80,9 +80,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 108.955,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7813702282436675
+            "rainfall_mm": 108.95,
+            "population_density": 255,
+            "prediction_accuracy": 0.7899246494815225
         },
         {
             "month": "Juli",
@@ -95,8 +95,8 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 37.24,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7732331305670298
+            "population_density": 255,
+            "prediction_accuracy": 0.8002801415579343
         },
         {
             "month": "Agustus",
@@ -109,8 +109,8 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 18.49,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.8027328935721357
+            "population_density": 255,
+            "prediction_accuracy": 0.7839301611396796
         },
         {
             "month": "September",
@@ -122,9 +122,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 69.175,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.790564504060026
+            "rainfall_mm": 69.17,
+            "population_density": 255,
+            "prediction_accuracy": 0.7958534742008364
         },
         {
             "month": "Oktober",
@@ -136,9 +136,9 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 47.795,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.8187454399401022
+            "rainfall_mm": 47.79,
+            "population_density": 255,
+            "prediction_accuracy": 0.8180555619448188
         },
         {
             "month": "November",
@@ -151,8 +151,8 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 81.77,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7766033384833267
+            "population_density": 255,
+            "prediction_accuracy": 0.7841357749578077
         },
         {
             "month": "Desember",
@@ -165,8 +165,8 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 65.07,
-            "population_density": 255.345,
-            "prediction_accuracy": 0.7848779385013724
+            "population_density": 255,
+            "prediction_accuracy": 0.8164059957694594
         }
     ],
     "model_info": {
@@ -191,72 +191,72 @@
             "total_cases_2023": 3404,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 1.942,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 1.94,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN SUKABUMI",
             "total_cases_2023": 840,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 689.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 689,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN CIANJUR",
             "total_cases_2023": 1934,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 727.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 727,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN BANDUNG",
             "total_cases_2023": 3590,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 2.206,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 2.21,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN GARUT",
             "total_cases_2023": 3268,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 920.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 920,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN TASIKMALAYA",
             "total_cases_2023": 764,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 738.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 738,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN CIAMIS",
             "total_cases_2023": 1421,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 813.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 813,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN KUNINGAN",
             "total_cases_2023": 2164,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 1.039,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 1.04,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN CIREBON",
             "total_cases_2023": 1833,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 2.312,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 2.31,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN MAJALENGKA",
@@ -264,79 +264,79 @@
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
             "population_density": 1.03,
-            "avg_rainfall": 61.34664473684211
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN SUMEDANG",
             "total_cases_2023": 2305,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 783.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 783,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN INDRAMAYU",
             "total_cases_2023": 529,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 954.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 954,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN SUBANG",
             "total_cases_2023": 1930,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 775.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 775,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN PURWAKARTA",
             "total_cases_2023": 1087,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 1.071,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 1.07,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN KARAWANG",
             "total_cases_2023": 3278,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 1.365,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 1.36,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN BEKASI",
             "total_cases_2023": 1902,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 2.708,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 2.71,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN BANDUNG BARAT",
             "total_cases_2023": 3754,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 1.489,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 1.49,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KABUPATEN PANGANDARAN",
             "total_cases_2023": 890,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 396.0,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 396,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA BOGOR",
             "total_cases_2023": 3116,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 10.273,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 10.3,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA SUKABUMI",
@@ -344,63 +344,63 @@
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
             "population_density": 7.66,
-            "avg_rainfall": 61.34664473684211
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA BANDUNG",
             "total_cases_2023": 7682,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 15.557,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 15.6,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA CIREBON",
             "total_cases_2023": 596,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 9.036,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 9.04,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA BEKASI",
             "total_cases_2023": 4168,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 12.074,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 12.1,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA DEPOK",
             "total_cases_2023": 5041,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 10.059,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 10.1,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA CIMAHI",
             "total_cases_2023": 849,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 13.716,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 13.7,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA TASIKMALAYA",
             "total_cases_2023": 1777,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 4.191,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 4.19,
+            "avg_rainfall": 61.35
         },
         {
             "province": "KOTA BANJAR",
             "total_cases_2023": 400,
             "dominant_factor": "Curah Hujan",
             "factor_importance": 0.10517790598804251,
-            "population_density": 1.598,
-            "avg_rainfall": 61.34664473684211
+            "population_density": 1.6,
+            "avg_rainfall": 61.35
         }
     ],
     "factor_summary": {

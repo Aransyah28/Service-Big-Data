@@ -12,6 +12,27 @@ from typing import Dict, List, Any
 import os
 
 
+def format_population_density(value: float) -> float:
+    """
+    Format population density according to requirements:
+    - For values < 100: Show with appropriate decimal places for 3 significant figures
+      (e.g., 1.03, 1.94, 15.6)
+    - For hundreds and thousands (>= 100): Round to integer, no decimals
+      (e.g., 255, 689, 1234, 15421)
+    """
+    if value >= 100:
+        # For hundreds and thousands: round to integer (no decimals)
+        return round(value)
+    else:
+        # For values < 100: show appropriate decimal places
+        if value >= 10:
+            return round(value, 1)  # e.g., 15.6
+        elif value >= 1:
+            return round(value, 2)  # e.g., 1.94
+        else:
+            return round(value, 3)  # e.g., 0.123
+
+
 class DBDDataProcessor:
     """Process DBD CSV data and generate ML analysis results"""
     
@@ -128,7 +149,7 @@ class DBDDataProcessor:
             
             total_cases = int(month_df['kasus_bulanan'].sum())
             avg_rainfall = round(float(month_df['jumlah_curah_hujan'].mean()), 2)
-            avg_density = round(float(month_df['kepadatan_penduduk'].mean()), 2)
+            avg_density = format_population_density(float(month_df['kepadatan_penduduk'].mean()))
             
             # Determine most influential factor based on model
             if self.feature_importance is not None:
@@ -197,7 +218,7 @@ class DBDDataProcessor:
                 'total_cases_2023': int(row['kasus_bulanan']),
                 'dominant_factor': dominant_factor,
                 'factor_importance': factor_importance,
-                'population_density': round(float(row['kepadatan_penduduk']), 2),
+                'population_density': format_population_density(float(row['kepadatan_penduduk'])),
                 'avg_rainfall': round(float(row['jumlah_curah_hujan']), 2)
             })
         
