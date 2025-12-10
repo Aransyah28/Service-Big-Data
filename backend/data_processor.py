@@ -127,8 +127,8 @@ class DBDDataProcessor:
             ]
             
             total_cases = int(month_df['kasus_bulanan'].sum())
-            avg_rainfall = float(month_df['jumlah_curah_hujan'].mean())
-            avg_density = float(month_df['kepadatan_penduduk'].mean())
+            avg_rainfall = round(float(month_df['jumlah_curah_hujan'].mean()), 2)
+            avg_density = round(float(month_df['kepadatan_penduduk'].mean()), 2)
             
             # Determine most influential factor based on model
             if self.feature_importance is not None:
@@ -197,8 +197,8 @@ class DBDDataProcessor:
                 'total_cases_2023': int(row['kasus_bulanan']),
                 'dominant_factor': dominant_factor,
                 'factor_importance': factor_importance,
-                'population_density': float(row['kepadatan_penduduk']),
-                'avg_rainfall': float(row['jumlah_curah_hujan'])
+                'population_density': round(float(row['kepadatan_penduduk']), 2),
+                'avg_rainfall': round(float(row['jumlah_curah_hujan']), 2)
             })
         
         return regional_data

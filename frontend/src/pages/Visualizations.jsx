@@ -100,7 +100,7 @@ function Visualizations() {
       return (
         <div className="custom-tooltip">
           <p className="label">{`${payload[0].payload.label}`}</p>
-          <p>{`${scatterData?.x_label}: ${payload[0].value}`}</p>
+          <p>{`${scatterData?.x_label}: ${typeof payload[0].value === 'number' ? payload[0].value.toFixed(2) : payload[0].value}`}</p>
           <p>{`Kasus: ${payload[0].payload.y.toLocaleString()}`}</p>
         </div>
       );
@@ -167,7 +167,7 @@ function Visualizations() {
               <Tooltip content={<CustomTooltip />} />
               <Legend />
               <Scatter
-                name={`${scatterData?.x_label} vs Kasus DBD`}
+                name={`${scatterData?.x_label}\nvs Kasus DBD`}
                 data={scatterChartData}
                 fill="#8884d8"
               />
