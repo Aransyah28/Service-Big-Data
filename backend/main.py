@@ -119,6 +119,12 @@ class ScatterPlotData(BaseModel):
     y_label: str
 
 
+class MultiScatterPlotData(BaseModel):
+    series: List[Dict[str, Any]]
+    x_label: str
+    y_label: str
+
+
 @app.get("/")
 async def root():
     """Root endpoint with API info"""
@@ -457,6 +463,117 @@ async def get_available_years():
         raise HTTPException(status_code=500, detail="CSV file not found")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error reading CSV: {str(e)}")
+
+
+@app.get("/api/available-regions")
+async def get_available_regions(year: Optional[int] = None):
+    """Get list of available kabupaten/kota in the dataset"""
+    try:
+        df = load_csv_data()
+        if year:
+            df = df[df['tahun'] == year]
+        
+        regions = sorted(df['nama_kabupaten_kota'].unique().tolist())
+        return {
+            "regions": regions,
+            "count": len(regions)
+        }
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="CSV file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading CSV: {str(e)}")
+
+
+@app.get("/api/scatter-rainfall-by-region", response_model=ScatterPlotData)
+async def get_rainfall_scatter_by_region(region: str, year: Optional[int] = None):
+    """
+    Get scatter plot data for rainfall vs cases for a specific kabupaten/kota
+    """
+    try:
+        df = load_csv_data()
+        
+        # Filter by year if specified
+        if year:
+            df = df[df['tahun'] == year]
+        
+        # Filter by region
+        df_region = df[df['nama_kabupaten_kota'] == region].copy()
+        
+        if len(df_region) == 0:
+            raise HTTPException(status_code=404, detail=f"Region '{region}' not found")
+        
+        # Sort by month to have progressive x-axis
+        df_region = df_region.sort_values('bulan')
+        
+        # Create month labels
+        month_names = [
+            'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
+            'Jul', 'Agu', 'Sep', 'Oct', 'Nov', 'Des'
+        ]
+        
+        x_values = df_region['jumlah_curah_hujan'].fillna(0).tolist()
+        y_values = df_region['kasus_bulanan'].fillna(0).astype(int).tolist()
+        labels = [f"{month_names[int(m)-1]} {int(y)}" if pd.notna(m) else "N/A" 
+                  for m, y in zip(df_region['bulan'], df_region['tahun'])]
+        
+        return ScatterPlotData(
+            x=x_values,
+            y=y_values,
+            labels=labels,
+            x_label="Curah Hujan (mm)",
+            y_label="Kasus Bulanan"
+        )
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="CSV file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
+@app.get("/api/scatter-population-all-regions", response_model=MultiScatterPlotData)
+async def get_population_scatter_all_regions(year: Optional[int] = None):
+    """
+    Get scatter plot data for population density vs cases for all kabupaten/kota
+    Each region will be a separate series with its own color
+    """
+    try:
+        df = load_csv_data()
+        
+        # Filter by year if specified
+        if year:
+            df = df[df['tahun'] == year]
+        
+        # Group by region and aggregate annual data
+        series_data = []
+        
+        for region in sorted(df['nama_kabupaten_kota'].unique()):
+            df_region = df[df['nama_kabupaten_kota'] == region].copy()
+            
+            if len(df_region) == 0:
+                continue
+            
+            # Get total cases for the year/period
+            total_cases = int(df_region['kasus_bulanan'].sum())
+            
+            # Get population density (should be constant for the region)
+            pop_density = float(df_region['kepadatan_penduduk'].iloc[0])
+            
+            series_data.append({
+                'name': region,
+                'data': [{
+                    'x': pop_density,
+                    'y': total_cases
+                }]
+            })
+        
+        return MultiScatterPlotData(
+            series=series_data,
+            x_label="Kepadatan Penduduk (per km²)",
+            y_label="Total Kasus Tahunan"
+        )
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="CSV file not found")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
 
 @app.get("/api/notebook-info")

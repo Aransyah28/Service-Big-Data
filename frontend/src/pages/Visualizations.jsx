@@ -15,7 +15,15 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
-import { getScatterPlotData, getLineChartData, getBarChartData, getAvailableYears } from '../services/api';
+import { 
+  getScatterPlotData, 
+  getLineChartData, 
+  getBarChartData, 
+  getAvailableYears, 
+  getAvailableRegions,
+  getRainfallScatterByRegion,
+  getPopulationScatterAllRegions 
+} from '../services/api';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -24,8 +32,19 @@ const FACTORS = [
   { id: 'population_density', name: 'Kepadatan Penduduk' },
 ];
 
+// Color palette for different regions
+const COLORS = [
+  '#8884d8', '#82ca9d', '#ffc658', '#ff7c7c', '#8dd1e1', '#d084d0',
+  '#a4de6c', '#d0ed57', '#ffc0cb', '#b8860b', '#ff6347', '#4682b4',
+  '#9370db', '#3cb371', '#f4a460', '#2e8b57', '#dda0dd', '#ff69b4',
+  '#cd853f', '#7b68ee', '#48d1cc', '#c71585', '#00ced1', '#ff1493',
+  '#1e90ff', '#ff8c00', '#32cd32', '#ba55d3', '#00fa9a', '#dc143c'
+];
+
 function Visualizations() {
   const [scatterData, setScatterData] = useState(null);
+  const [rainfallScatterData, setRainfallScatterData] = useState(null);
+  const [populationScatterData, setPopulationScatterData] = useState(null);
   const [lineData, setLineData] = useState(null);
   const [barData, setBarData] = useState(null);
   const [selectedFactor, setSelectedFactor] = useState('rainfall');
@@ -33,6 +52,8 @@ function Visualizations() {
   const [error, setError] = useState(null);
   const [availableYears, setAvailableYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
+  const [availableRegions, setAvailableRegions] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState(null);
 
   useEffect(() => {
     const fetchYears = async () => {
@@ -49,19 +70,35 @@ function Visualizations() {
   }, []);
 
   useEffect(() => {
+    const fetchRegions = async () => {
+      if (!selectedYear) return;
+      try {
+        const regionsData = await getAvailableRegions(selectedYear);
+        setAvailableRegions(regionsData.regions);
+        if (regionsData.regions.length > 0) {
+          setSelectedRegion(regionsData.regions[0]);
+        }
+      } catch (err) {
+        console.error('Error fetching regions:', err);
+      }
+    };
+    fetchRegions();
+  }, [selectedYear]);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (!selectedYear) return;
       
       try {
         setLoading(true);
-        const [scatter, line, bar] = await Promise.all([
-          getScatterPlotData(selectedFactor, selectedYear),
+        const [line, bar, popScatter] = await Promise.all([
           getLineChartData(selectedYear),
           getBarChartData(selectedYear),
+          getPopulationScatterAllRegions(selectedYear),
         ]);
-        setScatterData(scatter);
         setLineData(line);
         setBarData(bar);
+        setPopulationScatterData(popScatter);
       } catch (err) {
         setError('Gagal memuat data visualisasi. Pastikan backend berjalan.');
         console.error(err);
@@ -70,15 +107,35 @@ function Visualizations() {
       }
     };
     fetchData();
-  }, [selectedFactor, selectedYear]);
+  }, [selectedYear]);
+
+  useEffect(() => {
+    const fetchRainfallScatter = async () => {
+      if (!selectedYear || !selectedRegion) return;
+      
+      try {
+        const rainScatter = await getRainfallScatterByRegion(selectedRegion, selectedYear);
+        setRainfallScatterData(rainScatter);
+      } catch (err) {
+        console.error('Error fetching rainfall scatter:', err);
+      }
+    };
+    fetchRainfallScatter();
+  }, [selectedRegion, selectedYear]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
 
-  const scatterChartData = scatterData?.x.map((x, i) => ({
+  const rainfallChartData = rainfallScatterData?.x.map((x, i) => ({
     x,
-    y: scatterData.y[i],
-    label: scatterData.labels[i],
+    y: rainfallScatterData.y[i],
+    label: rainfallScatterData.labels[i],
+  }));
+
+  const populationChartData = populationScatterData?.series.map((series, index) => ({
+    name: series.name,
+    data: series.data,
+    color: COLORS[index % COLORS.length]
   }));
 
   const lineChartData = lineData?.labels.map((label, i) => ({
@@ -95,13 +152,37 @@ function Visualizations() {
     factor: barData.primary_factors[i],
   }));
 
-  const CustomTooltip = ({ active, payload }) => {
+  const RainfallTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip">
-          <p className="label">{`${payload[0].payload.label}`}</p>
-          <p>{`${scatterData?.x_label}: ${payload[0].value.toFixed(2)}`}</p>
+        <div className="custom-tooltip" style={{ 
+          backgroundColor: 'white', 
+          padding: '10px', 
+          border: '1px solid #ccc',
+          borderRadius: '4px'
+        }}>
+          <p className="label" style={{ fontWeight: 'bold' }}>{`${payload[0].payload.label}`}</p>
+          <p>{`Curah Hujan: ${payload[0].value.toFixed(2)} mm`}</p>
           <p>{`Kasus: ${payload[0].payload.y.toLocaleString()}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const PopulationTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="custom-tooltip" style={{ 
+          backgroundColor: 'white', 
+          padding: '10px', 
+          border: '1px solid #ccc',
+          borderRadius: '4px'
+        }}>
+          <p className="label" style={{ fontWeight: 'bold' }}>{data.name || 'Region'}</p>
+          <p>{`Kepadatan Penduduk: ${data.x?.toFixed(2) || data.payload?.x?.toFixed(2)} per km²`}</p>
+          <p>{`Total Kasus: ${(data.y || data.payload?.y)?.toLocaleString()}`}</p>
         </div>
       );
     }
@@ -135,73 +216,88 @@ function Visualizations() {
 
       <div className="visualization-section">
         <div className="section-header">
-          <h3>📈 Scatter Plot: Faktor vs Kasus DBD</h3>
+          <h3>📈 Scatter Plot: Curah Hujan vs Kasus DBD</h3>
           <div className="factor-selector">
-            <label>Pilih Faktor:</label>
+            <label>Pilih Kabupaten/Kota:</label>
             <select
-              value={selectedFactor}
-              onChange={(e) => setSelectedFactor(e.target.value)}
+              value={selectedRegion || ''}
+              onChange={(e) => setSelectedRegion(e.target.value)}
+              style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '4px', border: '1px solid #ccc', minWidth: '200px' }}
             >
-              {FACTORS.map((factor) => (
-                <option key={factor.id} value={factor.id}>
-                  {factor.name}
+              {availableRegions.map((region) => (
+                <option key={region} value={region}>
+                  {region}
                 </option>
               ))}
             </select>
           </div>
         </div>
+        <p style={{ color: '#666', marginBottom: '1rem', fontSize: '0.9rem' }}>
+          Menampilkan hubungan antara curah hujan dan kasus DBD untuk {selectedRegion} pada tahun {selectedYear}
+        </p>
         <div className="chart-container">
           <ResponsiveContainer width="100%" height={400}>
             <ScatterChart>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 dataKey="x"
-                name={scatterData?.x_label}
-                label={{ value: scatterData?.x_label, position: 'bottom' }}
+                name="Curah Hujan"
+                label={{ value: 'Curah Hujan (mm)', position: 'bottom' }}
               />
               <YAxis
                 dataKey="y"
                 name="Kasus Bulanan"
                 label={{ value: 'Kasus Bulanan', angle: -90, position: 'insideLeft' }}
               />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend 
-                content={(props) => {
-                  const { payload } = props;
-                  if (!payload || !payload.length) return null;
-                  
-                  return (
-                    <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                      {payload.map((entry, index) => {
-                        // Split at "vs" to create line break
-                        const parts = entry.value.split(' vs ');
-                        const hasMultipleParts = parts.length === 2;
-                        return (
-                          <div key={`legend-${index}`} style={{ display: 'inline-flex', alignItems: 'center', marginRight: '20px' }}>
-                            <svg width="14" height="14" style={{ marginRight: '5px' }}>
-                              <circle cx="7" cy="7" r="6" fill={entry.color} />
-                            </svg>
-                            <span>
-                              {parts[0]}
-                              {hasMultipleParts && (
-                                <>
-                                  <br />
-                                  vs {parts[1]}
-                                </>
-                              )}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                }}
-              />
+              <Tooltip content={<RainfallTooltip />} />
+              <Legend />
               <Scatter
-                name={`${scatterData?.x_label} vs Kasus DBD`}
-                data={scatterChartData}
+                name={`${selectedRegion}`}
+                data={rainfallChartData}
                 fill="#8884d8"
               />
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div className="visualization-section">
+        <div className="section-header">
+          <h3>📊 Scatter Plot: Kepadatan Penduduk vs Kasus DBD (Semua Kabupaten/Kota)</h3>
+        </div>
+        <p style={{ color: '#666', marginBottom: '1rem', fontSize: '0.9rem' }}>
+          Menampilkan hubungan antara kepadatan penduduk dan total kasus DBD untuk semua kabupaten/kota pada tahun {selectedYear}. 
+          Setiap warna mewakili kabupaten/kota yang berbeda.
+        </p>
+        <div className="chart-container">
+          <ResponsiveContainer width="100%" height={500}>
+            <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="x"
+                name="Kepadatan Penduduk"
+                label={{ value: 'Kepadatan Penduduk (per km²)', position: 'bottom' }}
+                type="number"
+              />
+              <YAxis
+                dataKey="y"
+                name="Total Kasus"
+                label={{ value: 'Total Kasus Tahunan', angle: -90, position: 'insideLeft' }}
+              />
+              <Tooltip content={<PopulationTooltip />} />
+              <Legend 
+                wrapperStyle={{ maxHeight: '150px', overflowY: 'auto' }}
+                layout="horizontal"
+                verticalAlign="top"
+              />
+              {populationChartData?.map((series, index) => (
+                <Scatter
+                  key={series.name}
+                  name={series.name}
+                  data={series.data}
+                  fill={series.color}
+                />
+              ))}
             </ScatterChart>
           </ResponsiveContainer>
         </div>
