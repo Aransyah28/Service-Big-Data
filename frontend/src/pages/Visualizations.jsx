@@ -175,6 +175,7 @@ function Visualizations() {
                       {payload.map((entry, index) => {
                         // Split at "vs" to create line break
                         const parts = entry.value.split(' vs ');
+                        const hasMultipleParts = parts.length >= 2;
                         return (
                           <div key={`legend-${index}`} style={{ display: 'inline-flex', alignItems: 'center', marginRight: '20px' }}>
                             <svg width="14" height="14" style={{ marginRight: '5px' }}>
@@ -182,8 +183,12 @@ function Visualizations() {
                             </svg>
                             <span>
                               {parts[0]}
-                              <br />
-                              vs {parts[1]}
+                              {hasMultipleParts && (
+                                <>
+                                  <br />
+                                  vs {parts[1]}
+                                </>
+                              )}
                             </span>
                           </div>
                         );
