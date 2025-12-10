@@ -100,7 +100,7 @@ function Visualizations() {
       return (
         <div className="custom-tooltip">
           <p className="label">{`${payload[0].payload.label}`}</p>
-          <p>{`${scatterData?.x_label}: ${typeof payload[0].value === 'number' ? payload[0].value.toFixed(2) : payload[0].value}`}</p>
+          <p>{`${scatterData?.x_label}: ${payload[0].value.toFixed(2)}`}</p>
           <p>{`Kasus: ${payload[0].payload.y.toLocaleString()}`}</p>
         </div>
       );
@@ -175,7 +175,7 @@ function Visualizations() {
                       {payload.map((entry, index) => {
                         // Split at "vs" to create line break
                         const parts = entry.value.split(' vs ');
-                        const hasMultipleParts = parts.length >= 2;
+                        const hasMultipleParts = parts.length === 2;
                         return (
                           <div key={`legend-${index}`} style={{ display: 'inline-flex', alignItems: 'center', marginRight: '20px' }}>
                             <svg width="14" height="14" style={{ marginRight: '5px' }}>
