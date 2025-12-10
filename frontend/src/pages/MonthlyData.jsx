@@ -151,13 +151,13 @@ function MonthlyData() {
                   <div className="detail-section">
                     <h4>🌡️ Data Lingkungan</h4>
                     <ul>
-                      <li>Curah Hujan: <strong>{item.rainfall_mm.toFixed(1)} mm</strong></li>
+                      <li>Curah Hujan: <strong>{item.rainfall_mm.toFixed(2)} mm</strong></li>
                     </ul>
                   </div>
                   <div className="detail-section">
                     <h4>👥 Data Demografis</h4>
                     <ul>
-                      <li>Kepadatan Penduduk: <strong>{item.population_density.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}/km²</strong></li>
+                      <li>Kepadatan Penduduk: <strong>{item.population_density.toFixed(2)}/km²</strong></li>
                     </ul>
                   </div>
                 </div>

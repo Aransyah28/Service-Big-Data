@@ -100,7 +100,7 @@ function Visualizations() {
       return (
         <div className="custom-tooltip">
           <p className="label">{`${payload[0].payload.label}`}</p>
-          <p>{`${scatterData?.x_label}: ${payload[0].value}`}</p>
+          <p>{`${scatterData?.x_label}: ${payload[0].value.toFixed(2)}`}</p>
           <p>{`Kasus: ${payload[0].payload.y.toLocaleString()}`}</p>
         </div>
       );
@@ -165,7 +165,38 @@ function Visualizations() {
                 label={{ value: 'Kasus Bulanan', angle: -90, position: 'insideLeft' }}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Legend />
+              <Legend 
+                content={(props) => {
+                  const { payload } = props;
+                  if (!payload || !payload.length) return null;
+                  
+                  return (
+                    <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                      {payload.map((entry, index) => {
+                        // Split at "vs" to create line break
+                        const parts = entry.value.split(' vs ');
+                        const hasMultipleParts = parts.length === 2;
+                        return (
+                          <div key={`legend-${index}`} style={{ display: 'inline-flex', alignItems: 'center', marginRight: '20px' }}>
+                            <svg width="14" height="14" style={{ marginRight: '5px' }}>
+                              <circle cx="7" cy="7" r="6" fill={entry.color} />
+                            </svg>
+                            <span>
+                              {parts[0]}
+                              {hasMultipleParts && (
+                                <>
+                                  <br />
+                                  vs {parts[1]}
+                                </>
+                              )}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                }}
+              />
               <Scatter
                 name={`${scatterData?.x_label} vs Kasus DBD`}
                 data={scatterChartData}
