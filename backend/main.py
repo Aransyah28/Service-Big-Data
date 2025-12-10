@@ -502,8 +502,8 @@ async def get_rainfall_scatter_by_region(region: str, year: Optional[int] = None
         if len(df_region) == 0:
             raise HTTPException(status_code=404, detail=f"Region '{region}' not found")
         
-        # Sort by month to have progressive x-axis
-        df_region = df_region.sort_values('bulan')
+        # Sort by rainfall amount to have progressive x-axis
+        df_region = df_region.sort_values('jumlah_curah_hujan')
         
         # Create month labels
         month_names = [
@@ -511,7 +511,8 @@ async def get_rainfall_scatter_by_region(region: str, year: Optional[int] = None
             'Jul', 'Agu', 'Sep', 'Oct', 'Nov', 'Des'
         ]
         
-        x_values = df_region['jumlah_curah_hujan'].fillna(0).tolist()
+        # Format rainfall values to 2 decimal places
+        x_values = [round(float(x), 2) for x in df_region['jumlah_curah_hujan'].fillna(0).tolist()]
         y_values = df_region['kasus_bulanan'].fillna(0).astype(int).tolist()
         labels = [f"{month_names[int(m)-1]} {int(y)}" if pd.notna(m) and 1 <= int(m) <= 12 else "N/A" 
                   for m, y in zip(df_region['bulan'], df_region['tahun'])]
