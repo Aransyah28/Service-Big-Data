@@ -11,7 +11,7 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 80.625,
-            "population_density": 255.3454074074074,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7799932985468265
         },
         {
@@ -25,7 +25,7 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 56.32,
-            "population_density": 255.3454074074074,
+            "population_density": 255.345,
             "prediction_accuracy": 0.8125213264838236
         },
         {
@@ -38,8 +38,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 60.67000000000001,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 60.67,
+            "population_density": 255.345,
             "prediction_accuracy": 0.824911469864156
         },
         {
@@ -52,8 +52,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 72.72499999999998,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 72.725,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7941019175559307
         },
         {
@@ -66,8 +66,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 37.32500000000001,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 37.325,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7848455712641482
         },
         {
@@ -81,7 +81,7 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 108.955,
-            "population_density": 255.3454074074074,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7813702282436675
         },
         {
@@ -95,7 +95,7 @@
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
             "rainfall_mm": 37.24,
-            "population_density": 255.3454074074074,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7732331305670298
         },
         {
@@ -108,8 +108,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 18.490000000000002,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 18.49,
+            "population_density": 255.345,
             "prediction_accuracy": 0.8027328935721357
         },
         {
@@ -122,8 +122,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 69.17499999999998,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 69.175,
+            "population_density": 255.345,
             "prediction_accuracy": 0.790564504060026
         },
         {
@@ -136,8 +136,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 47.79473684210528,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 47.795,
+            "population_density": 255.345,
             "prediction_accuracy": 0.8187454399401022
         },
         {
@@ -150,8 +150,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 81.77000000000001,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 81.77,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7766033384833267
         },
         {
@@ -164,8 +164,8 @@
             "secondary_importance": 0.1749727255026271,
             "tertiary_factor": "Curah Hujan",
             "tertiary_importance": 0.10517790598804251,
-            "rainfall_mm": 65.07000000000001,
-            "population_density": 255.3454074074074,
+            "rainfall_mm": 65.07,
+            "population_density": 255.345,
             "prediction_accuracy": 0.7848779385013724
         }
     ],
