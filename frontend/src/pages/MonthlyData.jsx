@@ -157,7 +157,7 @@ function MonthlyData() {
                   <div className="detail-section">
                     <h4>👥 Data Demografis</h4>
                     <ul>
-                      <li>Kepadatan Penduduk: <strong>{item.population_density.toFixed(2)}/km²</strong></li>
+                      <li>Kepadatan Penduduk: <strong>{item.population_density}/km²</strong></li>
                     </ul>
                   </div>
                 </div>

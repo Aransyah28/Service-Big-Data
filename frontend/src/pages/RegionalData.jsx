@@ -167,7 +167,7 @@ function RegionalData() {
                   </div>
                 </td>
                 <td>
-                  {item.population_density.toFixed(2)}/km²
+                  {item.population_density}/km²
                 </td>
                 <td>{item.avg_rainfall.toFixed(2)} mm</td>
               </tr>
