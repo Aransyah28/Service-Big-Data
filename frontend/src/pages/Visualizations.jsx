@@ -129,7 +129,7 @@ function Visualizations() {
 
   const populationChartData = populationScatterData?.series.map((series, index) => ({
     name: series.name,
-    data: series.data.map(point => ({ ...point, name: series.name })),
+    data: series.data,
     color: COLORS[index % COLORS.length]
   }));
 
@@ -167,9 +167,10 @@ function Visualizations() {
 
   const PopulationTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      const xValue = data.x ?? data.payload?.x ?? 0;
-      const yValue = data.y ?? data.payload?.y ?? 0;
+      const point = payload[0];
+      const regionName = point.name || 'Region';
+      const xValue = point.payload.x ?? point.value ?? 0;
+      const yValue = point.payload.y ?? 0;
       return (
         <div className="custom-tooltip" style={{ 
           backgroundColor: 'white', 
@@ -177,7 +178,7 @@ function Visualizations() {
           border: '1px solid #ccc',
           borderRadius: '4px'
         }}>
-          <p className="label" style={{ fontWeight: 'bold' }}>{data.name || 'Region'}</p>
+          <p className="label" style={{ fontWeight: 'bold' }}>{regionName}</p>
           <p>{`Kepadatan Penduduk: ${xValue.toFixed(2)} per km²`}</p>
           <p>{`Total Kasus: ${yValue.toLocaleString()}`}</p>
         </div>
