@@ -12,7 +12,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import { getRegionalData } from '../services/api';
+import { getRegionalData, getAvailableYears } from '../services/api';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -23,12 +23,30 @@ function RegionalData() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [availableYears, setAvailableYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  useEffect(() => {
+    const fetchYears = async () => {
+      try {
+        const yearsData = await getAvailableYears();
+        setAvailableYears(yearsData.years);
+        setSelectedYear(yearsData.default);
+      } catch (err) {
+        console.error('Error fetching years:', err);
+        setSelectedYear(2024);
+      }
+    };
+    fetchYears();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!selectedYear) return;
+      
       try {
         setLoading(true);
-        const result = await getRegionalData();
+        const result = await getRegionalData(selectedYear);
         setData(result);
       } catch (err) {
         setError('Gagal memuat data regional. Pastikan backend berjalan.');
@@ -38,7 +56,7 @@ function RegionalData() {
       }
     };
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
@@ -58,12 +76,30 @@ function RegionalData() {
     <div className="regional-data">
       <h2 className="page-title">Data Regional per Kabupaten/Kota</h2>
       <p className="page-subtitle">
-        Analisis kasus DBD dan faktor dominan untuk setiap kabupaten/kota di Jawa Barat
+        Analisis kasus DBD dan faktor dominan untuk setiap kabupaten/kota di Jawa Barat (Tahun {selectedYear})
       </p>
+
+      <div className="year-selector" style={{ marginBottom: '1rem' }}>
+        <label htmlFor="year-select" style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>
+          Pilih Tahun:
+        </label>
+        <select
+          id="year-select"
+          value={selectedYear || ''}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '4px', border: '1px solid #ccc' }}
+        >
+          {availableYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className="charts-grid">
         <div className="chart-container">
-          <h3>Kasus DBD per Kabupaten/Kota 2024</h3>
+          <h3>Kasus DBD per Kabupaten/Kota {selectedYear}</h3>
           <ResponsiveContainer width="100%" height={500}>
             <BarChart data={barChartData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -106,7 +142,7 @@ function RegionalData() {
           <thead>
             <tr>
               <th>Kabupaten/Kota</th>
-              <th>Total Kasus 2024</th>
+              <th>Total Kasus {selectedYear}</th>
               <th>Faktor Dominan</th>
               <th>Factor Importance</th>
               <th>Kepadatan Penduduk</th>
@@ -130,7 +166,12 @@ function RegionalData() {
                     <span>{(item.factor_importance * 100).toFixed(0)}%</span>
                   </div>
                 </td>
-                <td>{item.population_density.toLocaleString()}/km²</td>
+                <td>
+                  {item.population_density >= 1000 
+                    ? item.population_density.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})
+                    : item.population_density.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 3})
+                  }/km²
+                </td>
                 <td>{item.avg_rainfall.toFixed(1)} mm</td>
               </tr>
             ))}

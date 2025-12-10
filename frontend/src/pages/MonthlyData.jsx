@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getMonthlyResults } from '../services/api';
+import { getMonthlyResults, getAvailableYears } from '../services/api';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -10,12 +10,30 @@ function MonthlyData() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
+  const [availableYears, setAvailableYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  useEffect(() => {
+    const fetchYears = async () => {
+      try {
+        const yearsData = await getAvailableYears();
+        setAvailableYears(yearsData.years);
+        setSelectedYear(yearsData.default);
+      } catch (err) {
+        console.error('Error fetching years:', err);
+        setSelectedYear(2024);
+      }
+    };
+    fetchYears();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!selectedYear) return;
+      
       try {
         setLoading(true);
-        const result = await getMonthlyResults();
+        const result = await getMonthlyResults(selectedYear);
         setData(result);
       } catch (err) {
         setError('Gagal memuat data bulanan. Pastikan backend berjalan.');
@@ -25,7 +43,7 @@ function MonthlyData() {
       }
     };
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
@@ -34,8 +52,26 @@ function MonthlyData() {
     <div className="monthly-data">
       <h2 className="page-title">Data Hasil ML Bulanan</h2>
       <p className="page-subtitle">
-        Detail analisis faktor-faktor yang mempengaruhi kasus DBD untuk setiap bulan
+        Detail analisis faktor-faktor yang mempengaruhi kasus DBD untuk setiap bulan (Tahun {selectedYear})
       </p>
+
+      <div className="year-selector" style={{ marginBottom: '1rem' }}>
+        <label htmlFor="year-select" style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>
+          Pilih Tahun:
+        </label>
+        <select
+          id="year-select"
+          value={selectedYear || ''}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '4px', border: '1px solid #ccc' }}
+        >
+          {availableYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className="table-container">
         <table className="data-table">
@@ -43,7 +79,7 @@ function MonthlyData() {
             <tr>
               <th>Bulan</th>
               <th>Total Kasus</th>
-              <th>Faktor Utama</th>
+              <th>Faktor Dominan</th>
               <th>Importance</th>
               <th>Akurasi</th>
               <th>Aksi</th>
@@ -121,7 +157,7 @@ function MonthlyData() {
                   <div className="detail-section">
                     <h4>👥 Data Demografis</h4>
                     <ul>
-                      <li>Kepadatan Penduduk: <strong>{item.population_density.toFixed(0)}/km²</strong></li>
+                      <li>Kepadatan Penduduk: <strong>{item.population_density.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}/km²</strong></li>
                     </ul>
                   </div>
                 </div>

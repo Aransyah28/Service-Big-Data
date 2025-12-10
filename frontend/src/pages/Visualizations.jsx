@@ -15,7 +15,7 @@ import {
   AreaChart,
   Area,
 } from 'recharts';
-import { getScatterPlotData, getLineChartData, getBarChartData } from '../services/api';
+import { getScatterPlotData, getLineChartData, getBarChartData, getAvailableYears } from '../services/api';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -31,15 +31,33 @@ function Visualizations() {
   const [selectedFactor, setSelectedFactor] = useState('rainfall');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [availableYears, setAvailableYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(null);
+
+  useEffect(() => {
+    const fetchYears = async () => {
+      try {
+        const yearsData = await getAvailableYears();
+        setAvailableYears(yearsData.years);
+        setSelectedYear(yearsData.default);
+      } catch (err) {
+        console.error('Error fetching years:', err);
+        setSelectedYear(2024);
+      }
+    };
+    fetchYears();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!selectedYear) return;
+      
       try {
         setLoading(true);
         const [scatter, line, bar] = await Promise.all([
-          getScatterPlotData(selectedFactor),
-          getLineChartData(),
-          getBarChartData(),
+          getScatterPlotData(selectedFactor, selectedYear),
+          getLineChartData(selectedYear),
+          getBarChartData(selectedYear),
         ]);
         setScatterData(scatter);
         setLineData(line);
@@ -52,7 +70,7 @@ function Visualizations() {
       }
     };
     fetchData();
-  }, [selectedFactor]);
+  }, [selectedFactor, selectedYear]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
@@ -94,8 +112,26 @@ function Visualizations() {
     <div className="visualizations">
       <h2 className="page-title">Visualisasi Data ML</h2>
       <p className="page-subtitle">
-        Visualisasi hasil analisis menggunakan Random Forest Regressor dengan feature selection (Mutual Information, RFE, Lasso/Ridge)
+        Visualisasi hasil analisis menggunakan Random Forest Regressor dengan feature selection (Mutual Information, RFE, Lasso/Ridge) - Tahun {selectedYear}
       </p>
+
+      <div className="year-selector" style={{ marginBottom: '1rem' }}>
+        <label htmlFor="year-select" style={{ marginRight: '0.5rem', fontWeight: 'bold' }}>
+          Pilih Tahun:
+        </label>
+        <select
+          id="year-select"
+          value={selectedYear || ''}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          style={{ padding: '0.5rem', fontSize: '1rem', borderRadius: '4px', border: '1px solid #ccc' }}
+        >
+          {availableYears.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className="visualization-section">
         <div className="section-header">
@@ -125,8 +161,8 @@ function Visualizations() {
               />
               <YAxis
                 dataKey="y"
-                name="Total Kasus"
-                label={{ value: 'Total Kasus DBD', angle: -90, position: 'insideLeft' }}
+                name="Kasus Bulanan"
+                label={{ value: 'Kasus Bulanan', angle: -90, position: 'insideLeft' }}
               />
               <Tooltip content={<CustomTooltip />} />
               <Legend />
@@ -158,6 +194,7 @@ function Visualizations() {
                 stroke="#8884d8"
                 name="Total Kasus"
                 strokeWidth={2}
+                dot={{ r: 4 }}
               />
               <Line
                 yAxisId="right"
@@ -165,6 +202,8 @@ function Visualizations() {
                 dataKey="rainfall"
                 stroke="#82ca9d"
                 name="Curah Hujan (mm)"
+                strokeWidth={2}
+                dot={{ r: 4 }}
               />
             </LineChart>
           </ResponsiveContainer>
