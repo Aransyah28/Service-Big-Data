@@ -65,4 +65,24 @@ export const getAvailableYears = async () => {
   return response.data;
 };
 
+export const getAvailableRegions = async (year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/available-regions', { params });
+  return response.data;
+};
+
+export const getRainfallScatterByRegion = async (region, year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/scatter-rainfall-by-region', { 
+    params: { ...params, region } 
+  });
+  return response.data;
+};
+
+export const getPopulationScatterAllRegions = async (year = null) => {
+  const params = year ? { year } : {};
+  const response = await api.get('/api/scatter-population-all-regions', { params });
+  return response.data;
+};
+
 export default api;
