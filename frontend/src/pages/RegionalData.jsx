@@ -191,6 +191,9 @@ function RegionalData() {
           <li>
             Kepadatan penduduk juga berperan penting dalam penyebaran kasus DBD di wilayah urban
           </li>
+          <li>
+            <strong>Catatan:</strong> Data curah hujan rata-rata sama untuk semua kabupaten/kota karena merupakan data tingkat provinsi (Jawa Barat) yang berlaku untuk seluruh wilayah
+          </li>
         </ul>
       </div>
     </div>
