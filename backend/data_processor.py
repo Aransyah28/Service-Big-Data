@@ -15,19 +15,16 @@ import os
 def format_population_density(value: float) -> float:
     """
     Format population density according to requirements:
-    - For values < 100: Show 3 significant figures (e.g., 1.03, 1.94, 15.6)
-    - For hundreds (100-999): Show 3 digits (e.g., 255, 396, 689)
-    - For thousands (1000+): Show 4 digits (e.g., 1234, 5678)
+    - For values < 100: Show with appropriate decimal places for 3 significant figures
+      (e.g., 1.03, 1.94, 15.6)
+    - For hundreds and thousands (>= 100): Round to integer, no decimals
+      (e.g., 255, 689, 1234, 15421)
     """
-    if value >= 1000:
-        # For thousands: show 4 digits (round to integer)
-        return round(value)
-    elif value >= 100:
-        # For hundreds: show 3 digits (round to integer)
+    if value >= 100:
+        # For hundreds and thousands: round to integer (no decimals)
         return round(value)
     else:
-        # For values < 100: show 3 significant figures
-        # Round to appropriate decimal places
+        # For values < 100: show appropriate decimal places
         if value >= 10:
             return round(value, 1)  # e.g., 15.6
         elif value >= 1:
