@@ -84,7 +84,7 @@ class RegionalData(BaseModel):
     total_cases_2023: int
     dominant_factor: str
     factor_importance: float
-    population_density: int
+    population_density: float
     avg_rainfall: float
 
 

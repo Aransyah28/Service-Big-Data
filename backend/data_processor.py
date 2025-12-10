@@ -197,7 +197,7 @@ class DBDDataProcessor:
                 'total_cases_2023': int(row['kasus_bulanan']),
                 'dominant_factor': dominant_factor,
                 'factor_importance': factor_importance,
-                'population_density': int(row['kepadatan_penduduk']),
+                'population_density': float(row['kepadatan_penduduk']),
                 'avg_rainfall': float(row['jumlah_curah_hujan'])
             })
         

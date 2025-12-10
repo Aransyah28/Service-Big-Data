@@ -166,7 +166,12 @@ function RegionalData() {
                     <span>{(item.factor_importance * 100).toFixed(0)}%</span>
                   </div>
                 </td>
-                <td>{item.population_density.toLocaleString()}/km²</td>
+                <td>
+                  {item.population_density >= 1000 
+                    ? item.population_density.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})
+                    : item.population_density.toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 3})
+                  }/km²
+                </td>
                 <td>{item.avg_rainfall.toFixed(1)} mm</td>
               </tr>
             ))}
