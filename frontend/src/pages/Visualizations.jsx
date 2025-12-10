@@ -165,9 +165,35 @@ function Visualizations() {
                 label={{ value: 'Kasus Bulanan', angle: -90, position: 'insideLeft' }}
               />
               <Tooltip content={<CustomTooltip />} />
-              <Legend />
+              <Legend 
+                content={(props) => {
+                  const { payload } = props;
+                  if (!payload || !payload.length) return null;
+                  
+                  return (
+                    <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                      {payload.map((entry, index) => {
+                        // Split at "vs" to create line break
+                        const parts = entry.value.split(' vs ');
+                        return (
+                          <div key={`legend-${index}`} style={{ display: 'inline-flex', alignItems: 'center', marginRight: '20px' }}>
+                            <svg width="14" height="14" style={{ marginRight: '5px' }}>
+                              <circle cx="7" cy="7" r="6" fill={entry.color} />
+                            </svg>
+                            <span>
+                              {parts[0]}
+                              <br />
+                              vs {parts[1]}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                }}
+              />
               <Scatter
-                name={`${scatterData?.x_label}\nvs Kasus DBD`}
+                name={`${scatterData?.x_label} vs Kasus DBD`}
                 data={scatterChartData}
                 fill="#8884d8"
               />
