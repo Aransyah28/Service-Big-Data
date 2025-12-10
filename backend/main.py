@@ -11,6 +11,7 @@ from typing import List, Optional, Dict, Any
 import json
 import os
 import pandas as pd
+from functools import lru_cache
 
 app = FastAPI(
     title="DBD ML Analysis API",
@@ -35,10 +36,32 @@ DATA_FILE = os.path.join(os.path.dirname(__file__), "data", "dbd_ml_results.json
 CSV_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "Kasus_DBD_Gabungan.csv")
 NOTEBOOK_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "DBD_analysis_final.ipynb")
 
+@lru_cache(maxsize=1)
 def load_data():
     """Load ML results data from JSON file"""
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+@lru_cache(maxsize=1)
+def load_csv_data():
+    """Load and cache CSV data"""
+    return pd.read_csv(CSV_FILE)
+
+
+# Cache for processed data by year
+_data_cache = {}
+
+def get_or_create_processor(year: int):
+    """Get cached processor for a year or create new one"""
+    cache_key = f"processor_{year}"
+    if cache_key not in _data_cache:
+        from data_processor import DBDDataProcessor
+        processor = DBDDataProcessor(CSV_FILE)
+        processor.load_and_preprocess_data()
+        processor.train_model()
+        _data_cache[cache_key] = processor
+    return _data_cache[cache_key]
 
 
 # Pydantic models for API responses
@@ -129,11 +152,8 @@ async def get_monthly_results(year: Optional[int] = None):
     """Get all monthly ML analysis results, optionally filtered by year"""
     try:
         if year:
-            # Generate data dynamically for requested year
-            from data_processor import DBDDataProcessor
-            processor = DBDDataProcessor(CSV_FILE)
-            processor.load_and_preprocess_data()
-            processor.train_model()
+            # Generate data dynamically for requested year (with caching)
+            processor = get_or_create_processor(year)
             return processor.get_monthly_aggregated_data(year)
         else:
             # Return cached data
@@ -183,11 +203,8 @@ async def get_regional_data(year: Optional[int] = None):
     """Get regional DBD data by kabupaten/kota (districts/cities), optionally filtered by year"""
     try:
         if year:
-            # Generate data dynamically for requested year
-            from data_processor import DBDDataProcessor
-            processor = DBDDataProcessor(CSV_FILE)
-            processor.load_and_preprocess_data()
-            processor.train_model()
+            # Generate data dynamically for requested year (with caching)
+            processor = get_or_create_processor(year)
             return processor.get_regional_data(year)
         else:
             # Return cached data
@@ -205,11 +222,8 @@ async def get_scatter_plot_data(factor: str, year: Optional[int] = None):
     """
     try:
         if year:
-            # Generate data dynamically for requested year
-            from data_processor import DBDDataProcessor
-            processor = DBDDataProcessor(CSV_FILE)
-            processor.load_and_preprocess_data()
-            processor.train_model()
+            # Generate data dynamically for requested year (with caching)
+            processor = get_or_create_processor(year)
             results = processor.get_monthly_aggregated_data(year)
         else:
             data = load_data()
@@ -228,9 +242,14 @@ async def get_scatter_plot_data(factor: str, year: Optional[int] = None):
         
         field_name, label = factor_mapping[factor]
         
-        x_values = [result[field_name] for result in results]
-        y_values = [result["total_cases"] for result in results]
-        labels = [result["month"] for result in results]
+        # Create list of tuples (x, y, label) and sort by x value (factor)
+        data_points = [(result[field_name], result["total_cases"], result["month"]) for result in results]
+        data_points.sort(key=lambda point: point[0])  # Sort by x value (factor)
+        
+        # Unpack sorted data
+        x_values = [point[0] for point in data_points]
+        y_values = [point[1] for point in data_points]
+        labels = [point[2] for point in data_points]
         
         return ScatterPlotData(
             x=x_values,
@@ -289,11 +308,8 @@ async def get_line_chart_data(year: Optional[int] = None):
     """Get data formatted for line chart visualization"""
     try:
         if year:
-            # Generate data dynamically for requested year
-            from data_processor import DBDDataProcessor
-            processor = DBDDataProcessor(CSV_FILE)
-            processor.load_and_preprocess_data()
-            processor.train_model()
+            # Generate data dynamically for requested year (with caching)
+            processor = get_or_create_processor(year)
             results = processor.get_monthly_aggregated_data(year)
         else:
             data = load_data()
@@ -319,11 +335,8 @@ async def get_bar_chart_data(year: Optional[int] = None):
     """Get data formatted for bar chart showing factor importance per month"""
     try:
         if year:
-            # Generate data dynamically for requested year
-            from data_processor import DBDDataProcessor
-            processor = DBDDataProcessor(CSV_FILE)
-            processor.load_and_preprocess_data()
-            processor.train_model()
+            # Generate data dynamically for requested year (with caching)
+            processor = get_or_create_processor(year)
             results = processor.get_monthly_aggregated_data(year)
         else:
             data = load_data()
@@ -362,8 +375,8 @@ async def get_raw_data(
     - year: Filter by year
     """
     try:
-        # Load CSV
-        df = pd.read_csv(CSV_FILE)
+        # Load CSV (cached)
+        df = load_csv_data().copy()
         
         # Apply filters
         if province:
@@ -398,7 +411,7 @@ async def get_raw_data(
 async def get_raw_data_summary():
     """Get summary statistics of the raw CSV data"""
     try:
-        df = pd.read_csv(CSV_FILE)
+        df = load_csv_data()
         
         return {
             "total_records": len(df),
@@ -432,7 +445,7 @@ async def get_raw_data_summary():
 async def get_available_years():
     """Get list of available years in the dataset"""
     try:
-        df = pd.read_csv(CSV_FILE)
+        df = load_csv_data()
         years = sorted([int(y) for y in df['tahun'].unique()])
         return {
             "years": years,
