@@ -21,7 +21,9 @@ app = FastAPI(
 
 # CORS configuration for frontend
 # In production, set ALLOWED_ORIGINS environment variable to restrict origins
-ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000").split(",")
+# Default includes localhost for development and GitHub Pages for production
+default_origins = "http://localhost:5173,http://localhost:3000,https://aransyah28.github.io"
+ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", default_origins).split(",")
 
 app.add_middleware(
     CORSMiddleware,

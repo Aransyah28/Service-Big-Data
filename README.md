@@ -37,9 +37,28 @@ Aplikasi web untuk menampilkan hasil analisis Machine Learning terhadap kasus De
 ### Akses Demo Online
 Aplikasi frontend tersedia secara online di GitHub Pages:
 - **URL**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
-- **Catatan**: Untuk fungsionalitas penuh dengan backend, jalankan backend secara lokal (lihat instruksi di bawah)
+- **Backend**: Untuk fungsionalitas penuh, backend perlu di-deploy secara terpisah (lihat [Panduan Deployment Backend](BACKEND_DEPLOYMENT.md))
+- **Catatan**: GitHub Pages hanya hosting statis, tidak bisa menjalankan backend Python/FastAPI
 
-### Backend
+### Backend Deployment (Production)
+
+Backend FastAPI perlu di-deploy ke layanan cloud terpisah karena GitHub Pages tidak support aplikasi server:
+
+**Opsi Deployment (Gratis):**
+1. **Render** - Recommended, free tier tersedia
+2. **Railway** - $5/bulan kredit gratis
+3. **Vercel** - Serverless deployment
+
+**Langkah Deployment:**
+1. Baca panduan lengkap di [BACKEND_DEPLOYMENT.md](BACKEND_DEPLOYMENT.md)
+2. Deploy backend ke salah satu platform di atas
+3. Frontend di GitHub Pages akan otomatis terhubung ke backend
+
+File konfigurasi deployment sudah tersedia:
+- `render.yaml` - untuk Render deployment
+- `backend/vercel.json` - untuk Vercel deployment
+
+### Backend (Development Lokal)
 
 ```bash
 # Masuk ke direktori backend
@@ -158,7 +177,7 @@ Service-Big-Data/
 
 ## Deployment
 
-### GitHub Pages
+### Frontend - GitHub Pages
 Aplikasi frontend secara otomatis di-deploy ke GitHub Pages menggunakan GitHub Actions.
 
 **Setup Awal** (sudah dikonfigurasi):
@@ -169,7 +188,26 @@ Aplikasi frontend secara otomatis di-deploy ke GitHub Pages menggunakan GitHub A
 
 **URL Live**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
 
-Untuk detail lengkap setup dan troubleshooting, lihat [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md)
+### Backend - Cloud Platform
+
+**⚠️ PENTING**: GitHub Pages hanya bisa hosting file statis (HTML/CSS/JS). Backend FastAPI harus di-deploy ke platform terpisah.
+
+**Panduan Lengkap**: Lihat [BACKEND_DEPLOYMENT.md](BACKEND_DEPLOYMENT.md) untuk instruksi detail
+
+**Platform yang Didukung**:
+- ✅ **Render** (Recommended) - Free tier, auto-sleep setelah 15 menit idle
+- ✅ **Railway** - $5/bulan kredit gratis
+- ✅ **Vercel** - Serverless, gratis untuk personal project
+
+**Quick Start dengan Render**:
+1. Buat akun di [render.com](https://render.com)
+2. Connect repository GitHub Anda
+3. Deploy menggunakan file `render.yaml` yang sudah tersedia
+4. Backend akan tersedia di URL: `https://service-big-data-backend.onrender.com`
+
+**Catatan**: Setelah backend di-deploy, frontend di GitHub Pages akan otomatis terhubung karena URL backend sudah dikonfigurasi di GitHub Actions workflow.
+
+Untuk detail lengkap setup dan troubleshooting, lihat [BACKEND_DEPLOYMENT.md](BACKEND_DEPLOYMENT.md) dan [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md)
 
 ## Screenshot
 (Screenshots will be added after running the application)

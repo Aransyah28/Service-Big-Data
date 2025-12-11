@@ -45,7 +45,16 @@ After the first successful deployment (which happens automatically after enablin
 
 ## Notes
 
+### Frontend Only
 - The frontend application is built with React + Vite
 - The base path is configured to match the repository name
 - Build artifacts (dist folder) are not committed to the repository
 - Only the `main` branch triggers automatic deployments
+
+### Backend Deployment Required
+⚠️ **IMPORTANT**: GitHub Pages can only host static files. The backend FastAPI server must be deployed separately.
+
+- See [BACKEND_DEPLOYMENT.md](BACKEND_DEPLOYMENT.md) for backend deployment instructions
+- Recommended: Deploy backend to Render, Railway, or Vercel
+- The frontend is configured to connect to the production backend URL automatically
+- Backend URL is set in the GitHub Actions workflow environment variable
