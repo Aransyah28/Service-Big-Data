@@ -3,6 +3,9 @@ Projek UAS Big Data semester 5 diimplementasikan peminatan Software Engineering
 
 🌐 **Live Demo**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
 
+> ⚠️ **PENTING**: Backend perlu di-deploy terpisah untuk fungsionalitas penuh!  
+> 📖 **Panduan Deployment**: Lihat [QUICK_START_DEPLOYMENT.md](QUICK_START_DEPLOYMENT.md) atau [RINGKASAN_SOLUSI.md](RINGKASAN_SOLUSI.md)
+
 ## Deskripsi
 Aplikasi web untuk menampilkan hasil analisis Machine Learning terhadap kasus Demam Berdarah Dengue (DBD) di Jawa Barat. Sistem ini menggunakan data real dari tahun **2016-2024** untuk menganalisis dan memprediksi kasus DBD berdasarkan curah hujan, kepadatan penduduk, dan faktor-faktor lainnya. Aplikasi menampilkan visualisasi interaktif seperti scatter plot, line chart, bar chart, dan pie chart untuk memudahkan pemahaman data.
 
