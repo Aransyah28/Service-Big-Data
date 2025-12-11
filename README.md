@@ -1,6 +1,8 @@
 # Service-Big-Data
 Projek UAS Big Data semester 5 diimplementasikan peminatan Software Engineering
 
+🌐 **Live Demo**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
+
 ## Deskripsi
 Aplikasi web untuk menampilkan hasil analisis Machine Learning terhadap kasus Demam Berdarah Dengue (DBD) di Jawa Barat. Sistem ini menggunakan data real dari tahun **2016-2024** untuk menganalisis dan memprediksi kasus DBD berdasarkan curah hujan, kepadatan penduduk, dan faktor-faktor lainnya. Aplikasi menampilkan visualisasi interaktif seperti scatter plot, line chart, bar chart, dan pie chart untuk memudahkan pemahaman data.
 
@@ -31,6 +33,11 @@ Aplikasi web untuk menampilkan hasil analisis Machine Learning terhadap kasus De
 - Axios
 
 ## Instalasi dan Menjalankan
+
+### Akses Demo Online
+Aplikasi frontend tersedia secara online di GitHub Pages:
+- **URL**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
+- **Catatan**: Untuk fungsionalitas penuh dengan backend, jalankan backend secara lokal (lihat instruksi di bawah)
 
 ### Backend
 
@@ -148,6 +155,21 @@ Service-Big-Data/
 - **Rata-rata per Bulan**: 5,119 kasus
 - **Bulan Tertinggi**: Juni (9,091 kasus)
 - **Bulan Terendah**: Agustus (1,541 kasus)
+
+## Deployment
+
+### GitHub Pages
+Aplikasi frontend secara otomatis di-deploy ke GitHub Pages menggunakan GitHub Actions.
+
+**Setup Awal** (sudah dikonfigurasi):
+1. Repository sudah dikonfigurasi dengan GitHub Actions workflow
+2. Untuk mengaktifkan, buka Settings → Pages
+3. Set Source ke "GitHub Actions"
+4. Setiap push ke branch `main` akan otomatis deploy
+
+**URL Live**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
+
+Untuk detail lengkap setup dan troubleshooting, lihat [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md)
 
 ## Screenshot
 (Screenshots will be added after running the application)
