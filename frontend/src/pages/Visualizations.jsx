@@ -168,7 +168,8 @@ function Visualizations() {
   const PopulationTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const point = payload[0];
-      const regionName = point.name || 'Region';
+      // Get region name from payload data or from the series name
+      const regionName = point.payload.region || point.name || 'Region';
       const xValue = point.payload.x ?? point.value ?? 0;
       const yValue = point.payload.y ?? 0;
       return (
