@@ -209,9 +209,27 @@ class DBDDataProcessor:
         
         regional_data = []
         for _, row in regional.iterrows():
-            # Determine dominant factor (simplified)
-            dominant_factor = 'Curah Hujan'
-            factor_importance = float(self.feature_importance['jumlah_curah_hujan']) if self.feature_importance is not None else 0.85
+            # Determine dominant factor based on feature importance
+            if self.feature_importance is not None:
+                # Get the top factor from feature importance
+                top_factor = self.feature_importance.idxmax()
+                factor_importance_value = float(self.feature_importance[top_factor])
+                
+                # Map technical names to Indonesian names
+                factor_names = {
+                    'jumlah_curah_hujan': 'Curah Hujan',
+                    'rain_lag1': 'Curah Hujan (Bulan Lalu)',
+                    'rain_3m_mean': 'Rata-rata Curah Hujan 3 Bulan',
+                    'kepadatan_penduduk': 'Kepadatan Penduduk',
+                    'rain_x_density': 'Interaksi Hujan & Kepadatan',
+                    'bulan': 'Musim (Bulan)'
+                }
+                
+                dominant_factor = factor_names.get(top_factor, top_factor)
+                factor_importance = factor_importance_value
+            else:
+                dominant_factor = 'Curah Hujan'
+                factor_importance = 0.85
             
             regional_data.append({
                 'province': row['nama_kabupaten_kota'],
