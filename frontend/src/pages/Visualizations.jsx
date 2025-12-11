@@ -35,6 +35,21 @@ const COLORS = [
   '#1e90ff', '#ff8c00', '#32cd32', '#ba55d3', '#00fa9a', '#dc143c'
 ];
 
+// Custom shape renderer for scatter plot - defined outside component for performance
+const renderColoredDot = (props) => {
+  const { cx, cy, payload } = props;
+  return (
+    <circle
+      cx={cx}
+      cy={cy}
+      r={6}
+      fill={payload.color}
+      stroke="#fff"
+      strokeWidth={1}
+    />
+  );
+};
+
 function Visualizations() {
   const [rainfallScatterData, setRainfallScatterData] = useState(null);
   const [populationScatterData, setPopulationScatterData] = useState(null);
@@ -306,19 +321,7 @@ function Visualizations() {
                 name="Semua Kabupaten/Kota"
                 data={populationChartData}
                 fill="#8884d8"
-                shape={(props) => {
-                  const { cx, cy, payload } = props;
-                  return (
-                    <circle
-                      cx={cx}
-                      cy={cy}
-                      r={6}
-                      fill={payload.color}
-                      stroke="#fff"
-                      strokeWidth={1}
-                    />
-                  );
-                }}
+                shape={renderColoredDot}
               />
               {/* Add invisible scatters for legend */}
               {populationSeriesData?.map((series) => (
