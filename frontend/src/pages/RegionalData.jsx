@@ -183,10 +183,10 @@ function RegionalData() {
             Data menunjukkan variasi kasus DBD di berbagai kabupaten/kota di Jawa Barat
           </li>
           <li>
-            <strong>Curah Hujan</strong> merupakan faktor dominan yang mempengaruhi kasus DBD di sebagian besar wilayah
+            <strong>Kepadatan Penduduk</strong> merupakan faktor dominan yang mempengaruhi kasus DBD di sebagian besar wilayah
           </li>
           <li>
-            Kepadatan penduduk juga berperan penting dalam penyebaran kasus DBD di wilayah urban
+            Curah hujan juga berperan penting dalam penyebaran kasus DBD sebagai faktor sekunder
           </li>
           <li>
             <strong>Catatan:</strong> Data curah hujan rata-rata sama untuk semua kabupaten/kota karena merupakan data tingkat provinsi (Jawa Barat) yang berlaku untuk seluruh wilayah
