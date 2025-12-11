@@ -16,7 +16,6 @@ import {
   Area,
 } from 'recharts';
 import { 
-  getScatterPlotData, 
   getLineChartData, 
   getBarChartData, 
   getAvailableYears, 
@@ -37,12 +36,10 @@ const COLORS = [
 ];
 
 function Visualizations() {
-  const [scatterData, setScatterData] = useState(null);
   const [rainfallScatterData, setRainfallScatterData] = useState(null);
   const [populationScatterData, setPopulationScatterData] = useState(null);
   const [lineData, setLineData] = useState(null);
   const [barData, setBarData] = useState(null);
-  const [selectedFactor, setSelectedFactor] = useState('rainfall');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [availableYears, setAvailableYears] = useState([]);
@@ -127,7 +124,18 @@ function Visualizations() {
     label: rainfallScatterData.labels[i],
   }));
 
-  const populationChartData = populationScatterData?.series.map((series, index) => ({
+  // Flatten all series into a single dataset for better tooltip handling
+  const populationChartData = populationScatterData?.series.flatMap((series, index) => 
+    series.data.map(point => ({
+      x: point.x,
+      y: point.y,
+      region: series.name,  // Store region name in each point
+      color: COLORS[index % COLORS.length]
+    }))
+  ) || [];
+  
+  // Also keep the series structure for legend
+  const populationSeriesData = populationScatterData?.series.map((series, index) => ({
     name: series.name,
     data: series.data,
     color: COLORS[index % COLORS.length]
@@ -166,23 +174,24 @@ function Visualizations() {
   };
 
   const PopulationTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const point = payload[0];
-      // Get region name from the data point's name field
-      const regionName = point.payload.name || 'Wilayah';
-      // Get x and y values from the payload
-      const xValue = point.payload.x ?? point.value ?? 0;
-      const yValue = point.payload.y ?? 0;
+    if (active && payload && payload.length > 0) {
+      const point = payload[0].payload;
+      // Now we have direct access to region from the flattened data
+      const regionName = point.region || 'Wilayah';
+      const xValue = point.x || 0;
+      const yValue = point.y || 0;
+      
       return (
         <div className="custom-tooltip" style={{ 
           backgroundColor: 'white', 
           padding: '10px', 
           border: '1px solid #ccc',
-          borderRadius: '4px'
+          borderRadius: '4px',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
         }}>
-          <p className="label" style={{ fontWeight: 'bold' }}>{regionName}</p>
-          <p>{`Kepadatan Penduduk: ${Math.round(xValue)} per km²`}</p>
-          <p>{`Total Kasus: ${yValue.toLocaleString()}`}</p>
+          <p className="label" style={{ fontWeight: 'bold', marginBottom: '5px' }}>{regionName}</p>
+          <p style={{ margin: '3px 0' }}>{`Kepadatan Penduduk: ${Math.round(xValue).toLocaleString()} per km²`}</p>
+          <p style={{ margin: '3px 0' }}>{`Total Kasus: ${yValue.toLocaleString()}`}</p>
         </div>
       );
     }
@@ -293,12 +302,32 @@ function Visualizations() {
                 layout="horizontal"
                 verticalAlign="top"
               />
-              {populationChartData?.map((series, index) => (
+              <Scatter
+                name="Semua Kabupaten/Kota"
+                data={populationChartData}
+                fill="#8884d8"
+                shape={(props) => {
+                  const { cx, cy, payload } = props;
+                  return (
+                    <circle
+                      cx={cx}
+                      cy={cy}
+                      r={6}
+                      fill={payload.color}
+                      stroke="#fff"
+                      strokeWidth={1}
+                    />
+                  );
+                }}
+              />
+              {/* Add invisible scatters for legend */}
+              {populationSeriesData?.map((series) => (
                 <Scatter
                   key={series.name}
                   name={series.name}
-                  data={series.data}
+                  data={[]}
                   fill={series.color}
+                  legendType="circle"
                 />
               ))}
             </ScatterChart>
