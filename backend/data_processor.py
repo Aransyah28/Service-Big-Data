@@ -218,8 +218,8 @@ class DBDDataProcessor:
                 dominant_factor = self.FACTOR_NAMES.get(top_factor, top_factor)
                 factor_importance = factor_importance_value
             else:
-                dominant_factor = 'Curah Hujan'
-                factor_importance = 0.85
+                dominant_factor = 'Kepadatan Penduduk'
+                factor_importance = 0.60
             
             regional_data.append({
                 'province': row['nama_kabupaten_kota'],
