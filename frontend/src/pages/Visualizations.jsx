@@ -168,8 +168,9 @@ function Visualizations() {
   const PopulationTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const point = payload[0];
-      // Get region name from payload data or from the series name
-      const regionName = point.payload.region || point.name || 'Region';
+      // Get region name from the data point's name field
+      const regionName = point.payload.name || 'Region';
+      // Get x and y values from the payload
       const xValue = point.payload.x ?? point.value ?? 0;
       const yValue = point.payload.y ?? 0;
       return (
@@ -180,7 +181,7 @@ function Visualizations() {
           borderRadius: '4px'
         }}>
           <p className="label" style={{ fontWeight: 'bold' }}>{regionName}</p>
-          <p>{`Kepadatan Penduduk: ${xValue.toFixed(2)} per km²`}</p>
+          <p>{`Kepadatan Penduduk: ${Math.round(xValue)} per km²`}</p>
           <p>{`Total Kasus: ${yValue.toLocaleString()}`}</p>
         </div>
       );
