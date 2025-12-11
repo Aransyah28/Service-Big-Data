@@ -191,7 +191,6 @@ function Visualizations() {
   const PopulationTooltip = ({ active, payload }) => {
     if (active && payload && payload.length > 0) {
       const point = payload[0].payload;
-      // Now we have direct access to region from the flattened data
       const regionName = point.region || 'Wilayah';
       const xValue = point.x || 0;
       const yValue = point.y || 0;
