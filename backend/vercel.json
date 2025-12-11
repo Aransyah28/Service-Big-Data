@@ -13,6 +13,7 @@
     }
   ],
   "env": {
+    "_comment": "⚠️ Update ALLOWED_ORIGINS to match YOUR GitHub Pages URL",
     "ALLOWED_ORIGINS": "https://aransyah28.github.io"
   }
 }

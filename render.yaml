@@ -11,4 +11,6 @@ services:
       - key: PYTHON_VERSION
         value: 3.9.16
       - key: ALLOWED_ORIGINS
+        # ⚠️ Update this to match YOUR GitHub Pages URL
+        # Format: https://YOUR-USERNAME.github.io
         value: https://aransyah28.github.io
