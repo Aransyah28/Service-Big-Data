@@ -169,7 +169,7 @@ function Visualizations() {
     if (active && payload && payload.length) {
       const point = payload[0];
       // Get region name from the data point's name field
-      const regionName = point.payload.name || 'Region';
+      const regionName = point.payload.name || 'Wilayah';
       // Get x and y values from the payload
       const xValue = point.payload.x ?? point.value ?? 0;
       const yValue = point.payload.y ?? 0;
