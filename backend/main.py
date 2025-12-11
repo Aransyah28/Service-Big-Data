@@ -562,7 +562,8 @@ async def get_population_scatter_all_regions(year: Optional[int] = None):
                 'name': region,
                 'data': [{
                     'x': pop_density,
-                    'y': total_cases
+                    'y': total_cases,
+                    'name': region  # Add region name to each data point
                 }]
             })
         
