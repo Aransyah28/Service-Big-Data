@@ -36,16 +36,6 @@ def format_population_density(value: float) -> float:
 class DBDDataProcessor:
     """Process DBD CSV data and generate ML analysis results"""
     
-    # Feature name mapping from technical to Indonesian names
-    FACTOR_NAMES = {
-        'jumlah_curah_hujan': 'Curah Hujan',
-        'rain_lag1': 'Curah Hujan (Bulan Lalu)',
-        'rain_3m_mean': 'Rata-rata Curah Hujan 3 Bulan',
-        'kepadatan_penduduk': 'Kepadatan Penduduk',
-        'rain_x_density': 'Interaksi Hujan & Kepadatan',
-        'bulan': 'Musim (Bulan)'
-    }
-    
     def __init__(self, csv_path: str):
         """Initialize processor with CSV file path"""
         self.csv_path = csv_path
@@ -166,10 +156,20 @@ class DBDDataProcessor:
                 factors = self.feature_importance.head(3)
                 factor_list = factors.to_dict()
                 
+                # Map technical names to Indonesian names
+                factor_names = {
+                    'jumlah_curah_hujan': 'Curah Hujan',
+                    'rain_lag1': 'Curah Hujan (Bulan Lalu)',
+                    'rain_3m_mean': 'Rata-rata Curah Hujan 3 Bulan',
+                    'kepadatan_penduduk': 'Kepadatan Penduduk',
+                    'rain_x_density': 'Interaksi Hujan & Kepadatan',
+                    'bulan': 'Musim (Bulan)'
+                }
+                
                 top_factors = list(factors.index)
-                most_influential = self.FACTOR_NAMES.get(top_factors[0], top_factors[0])
-                secondary_factor = self.FACTOR_NAMES.get(top_factors[1], top_factors[1]) if len(top_factors) > 1 else "N/A"
-                tertiary_factor = self.FACTOR_NAMES.get(top_factors[2], top_factors[2]) if len(top_factors) > 2 else "N/A"
+                most_influential = factor_names.get(top_factors[0], top_factors[0])
+                secondary_factor = factor_names.get(top_factors[1], top_factors[1]) if len(top_factors) > 1 else "N/A"
+                tertiary_factor = factor_names.get(top_factors[2], top_factors[2]) if len(top_factors) > 2 else "N/A"
                 
                 monthly_data.append({
                     'month': month_names[month - 1],
@@ -209,17 +209,9 @@ class DBDDataProcessor:
         
         regional_data = []
         for _, row in regional.iterrows():
-            # Determine dominant factor based on feature importance
-            if self.feature_importance is not None:
-                # Get the top factor from feature importance
-                top_factor = self.feature_importance.idxmax()
-                factor_importance_value = float(self.feature_importance[top_factor])
-                
-                dominant_factor = self.FACTOR_NAMES.get(top_factor, top_factor)
-                factor_importance = factor_importance_value
-            else:
-                dominant_factor = 'Curah Hujan'
-                factor_importance = 0.85
+            # Determine dominant factor (simplified)
+            dominant_factor = 'Curah Hujan'
+            factor_importance = float(self.feature_importance['jumlah_curah_hujan']) if self.feature_importance is not None else 0.85
             
             regional_data.append({
                 'province': row['nama_kabupaten_kota'],
@@ -237,20 +229,18 @@ class DBDDataProcessor:
         if self.feature_importance is None:
             self.train_model()
         
-        # Descriptions for each factor
-        factor_descriptions = {
-            'jumlah_curah_hujan': 'Jumlah curah hujan bulanan yang mempengaruhi perkembangbiakan nyamuk',
-            'rain_lag1': 'Curah hujan bulan sebelumnya (efek tertunda)',
-            'rain_3m_mean': 'Rata-rata curah hujan dalam 3 bulan terakhir',
-            'kepadatan_penduduk': 'Jumlah penduduk per km² yang mempengaruhi penyebaran',
-            'rain_x_density': 'Interaksi antara curah hujan dan kepadatan penduduk',
-            'bulan': 'Pengaruh musim berdasarkan bulan dalam setahun'
+        factor_names = {
+            'jumlah_curah_hujan': ('Curah Hujan', 'Jumlah curah hujan bulanan yang mempengaruhi perkembangbiakan nyamuk'),
+            'rain_lag1': ('Curah Hujan Bulan Lalu', 'Curah hujan bulan sebelumnya (efek tertunda)'),
+            'rain_3m_mean': ('Rata-rata Curah Hujan 3 Bulan', 'Rata-rata curah hujan dalam 3 bulan terakhir'),
+            'kepadatan_penduduk': ('Kepadatan Penduduk', 'Jumlah penduduk per km² yang mempengaruhi penyebaran'),
+            'rain_x_density': ('Interaksi Hujan & Kepadatan', 'Interaksi antara curah hujan dan kepadatan penduduk'),
+            'bulan': ('Musim (Bulan)', 'Pengaruh musim berdasarkan bulan dalam setahun')
         }
         
         factors = []
         for feature, importance in self.feature_importance.items():
-            name = self.FACTOR_NAMES.get(feature, feature)
-            description = factor_descriptions.get(feature, 'Deskripsi tidak tersedia')
+            name, description = factor_names.get(feature, (feature, 'Deskripsi tidak tersedia'))
             factors.append({
                 'name': name,
                 'avg_importance': float(importance),
