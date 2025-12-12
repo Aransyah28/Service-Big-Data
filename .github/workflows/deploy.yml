@@ -38,6 +38,10 @@ jobs:
         run: |
           cd frontend
           npm run build
+        env:
+          # ⚠️ Update this URL after deploying your backend
+          # This should match your backend deployment URL
+          VITE_API_URL: https://service-big-data-backend.onrender.com
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
