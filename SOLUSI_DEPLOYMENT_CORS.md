@@ -21,12 +21,14 @@
 
 ### Pilih Platform Deployment:
 
-| Platform | Difficulty | Speed | Free Forever |
-|----------|-----------|-------|--------------|
-| **Koyeb** ⭐ | ⭐⭐⭐⭐⭐ Easiest | ⭐⭐⭐⭐ Fast | ✅ Yes |
-| **PythonAnywhere** | ⭐⭐⭐⭐⭐ Easiest | ⭐⭐⭐ Medium | ✅ Yes |
-| **Fly.io** | ⭐⭐⭐⭐ Easy | ⭐⭐⭐⭐⭐ Fastest | ✅ Yes |
-| **Glitch** | ⭐⭐⭐ Medium | ⭐⭐ Slow | ✅ Yes |
+| Platform | Difficulty | Speed | Free Forever | Auto-Sleep |
+|----------|-----------|-------|--------------|------------|
+| **Koyeb** ⭐ | ⭐⭐⭐⭐⭐ Easiest | ⭐⭐⭐⭐ Fast | ✅ Yes | 30 min |
+| **PythonAnywhere** | ⭐⭐⭐⭐⭐ Easiest | ⭐⭐⭐ Medium | ✅ Yes | ❌ No |
+| **Fly.io** | ⭐⭐⭐⭐ Easy | ⭐⭐⭐⭐⭐ Fastest | ✅ Yes | Auto-stop* |
+| **Glitch** | ⭐⭐⭐ Medium | ⭐⭐ Slow | ✅ Yes | 5 min |
+
+*Fly.io free tier: machines auto-stop when idle, auto-start on requests (~10-30s cold start)
 
 **Rekomendasi**: Mulai dengan **Koyeb** (paling mudah dan cepat)
 

@@ -7,9 +7,11 @@
 | Platform | Free Tier | Kebutuhan CC | Auto-Sleep | Setup |
 |----------|-----------|--------------|------------|-------|
 | **Koyeb** ⭐ | ✅ Gratis Permanen | ❌ Tidak Perlu | ✅ Ya (30min) | ⭐⭐⭐⭐⭐ Mudah |
-| **Fly.io** | ✅ Gratis Limited | ❌ Tidak Perlu | ❌ Always On | ⭐⭐⭐⭐ Mudah |
+| **Fly.io** | ✅ Gratis Limited | ❌ Tidak Perlu | ⚠️ Auto-stop* | ⭐⭐⭐⭐ Mudah |
 | **PythonAnywhere** | ✅ Gratis Permanen | ❌ Tidak Perlu | ❌ Always On | ⭐⭐⭐⭐⭐ Mudah |
 | **Glitch** | ✅ Gratis Permanen | ❌ Tidak Perlu | ✅ Ya (5min) | ⭐⭐⭐ Sedang |
+
+*Fly.io free tier: machines auto-stop when idle, auto-start on requests (~10-30s cold start)
 
 ---
 

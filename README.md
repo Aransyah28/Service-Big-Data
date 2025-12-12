@@ -4,14 +4,14 @@ Projek UAS Big Data semester 5 diimplementasikan peminatan Software Engineering
 🌐 **Live Demo**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
 
 > ⚠️ **UPDATE PENTING**: Render meminta kartu kredit, Railway berbayar, Vercel error?  
-> ✅ **SOLUSI**: [Alternatif Deployment GRATIS](SOLUSI_DEPLOYMENT_CORS.md) tanpa kartu kredit!  
-> 🔍 **CORS Testing**: [Panduan Testing CORS](PANDUAN_CORS_TESTING.md)
+> ✅ **SOLUSI**: [🎯 QUICK REFERENCE - Mulai di sini!](QUICK_REFERENCE.md)
 
 ## 📖 Panduan Deployment & CORS
 
 | Dokumen | Deskripsi |
 |---------|-----------|
-| **[SOLUSI_DEPLOYMENT_CORS.md](SOLUSI_DEPLOYMENT_CORS.md)** | 🆕 **START HERE!** Deployment gratis tanpa CC + testing CORS |
+| **[🎯 QUICK_REFERENCE.md](QUICK_REFERENCE.md)** | ⭐ **START HERE!** Panduan super cepat (5-10 menit) |
+| **[SOLUSI_DEPLOYMENT_CORS.md](SOLUSI_DEPLOYMENT_CORS.md)** | Deployment gratis tanpa CC + testing CORS |
 | **[ALTERNATIF_DEPLOYMENT_GRATIS.md](ALTERNATIF_DEPLOYMENT_GRATIS.md)** | Detail 4 platform gratis: Koyeb, Fly.io, PythonAnywhere, Glitch |
 | **[PANDUAN_CORS_TESTING.md](PANDUAN_CORS_TESTING.md)** | Cara lengkap testing & fixing CORS errors |
 | [QUICK_START_DEPLOYMENT.md](QUICK_START_DEPLOYMENT.md) | Quick start deployment (Render - butuh CC) |
@@ -60,10 +60,10 @@ Aplikasi frontend tersedia secara online di GitHub Pages:
 Backend FastAPI perlu di-deploy ke layanan cloud terpisah karena GitHub Pages tidak support aplikasi server:
 
 **🆕 Opsi Deployment GRATIS (TANPA Kartu Kredit):**
-1. **Koyeb** ⭐ - RECOMMENDED! UI mudah, tidak perlu CC
-2. **PythonAnywhere** - Always-on, gratis permanen
-3. **Fly.io** - Performa terbaik, CLI-based
-4. **Glitch** - Web IDE, instant preview
+1. **Koyeb** ⭐ - RECOMMENDED! UI mudah, tidak perlu CC (auto-sleep 30min)
+2. **PythonAnywhere** - Always-on, gratis permanen, perfect untuk Python
+3. **Fly.io** - Performa terbaik, CLI-based (auto-stop saat idle)
+4. **Glitch** - Web IDE, instant preview (auto-sleep 5min)
 
 **📖 Panduan Lengkap**: Lihat [SOLUSI_DEPLOYMENT_CORS.md](SOLUSI_DEPLOYMENT_CORS.md) atau [ALTERNATIF_DEPLOYMENT_GRATIS.md](ALTERNATIF_DEPLOYMENT_GRATIS.md)
 
