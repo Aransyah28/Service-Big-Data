@@ -31,8 +31,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    Access-Control-Allow-Origin: "https://aransyah28.github.io",
-
 )
 
 # Load data from JSON file

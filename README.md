@@ -3,8 +3,20 @@ Projek UAS Big Data semester 5 diimplementasikan peminatan Software Engineering
 
 🌐 **Live Demo**: [https://aransyah28.github.io/Service-Big-Data/](https://aransyah28.github.io/Service-Big-Data/)
 
-> ⚠️ **PENTING**: Backend perlu di-deploy terpisah untuk fungsionalitas penuh!  
-> 📖 **Panduan Deployment**: Lihat [QUICK_START_DEPLOYMENT.md](QUICK_START_DEPLOYMENT.md) atau [RINGKASAN_SOLUSI.md](RINGKASAN_SOLUSI.md)
+> ⚠️ **UPDATE PENTING**: Render meminta kartu kredit, Railway berbayar, Vercel error?  
+> ✅ **SOLUSI**: [Alternatif Deployment GRATIS](SOLUSI_DEPLOYMENT_CORS.md) tanpa kartu kredit!  
+> 🔍 **CORS Testing**: [Panduan Testing CORS](PANDUAN_CORS_TESTING.md)
+
+## 📖 Panduan Deployment & CORS
+
+| Dokumen | Deskripsi |
+|---------|-----------|
+| **[SOLUSI_DEPLOYMENT_CORS.md](SOLUSI_DEPLOYMENT_CORS.md)** | 🆕 **START HERE!** Deployment gratis tanpa CC + testing CORS |
+| **[ALTERNATIF_DEPLOYMENT_GRATIS.md](ALTERNATIF_DEPLOYMENT_GRATIS.md)** | Detail 4 platform gratis: Koyeb, Fly.io, PythonAnywhere, Glitch |
+| **[PANDUAN_CORS_TESTING.md](PANDUAN_CORS_TESTING.md)** | Cara lengkap testing & fixing CORS errors |
+| [QUICK_START_DEPLOYMENT.md](QUICK_START_DEPLOYMENT.md) | Quick start deployment (Render - butuh CC) |
+| [BACKEND_DEPLOYMENT.md](BACKEND_DEPLOYMENT.md) | Dokumentasi deployment backend lengkap |
+| [RINGKASAN_SOLUSI.md](RINGKASAN_SOLUSI.md) | Ringkasan solusi deployment |
 
 ## Deskripsi
 Aplikasi web untuk menampilkan hasil analisis Machine Learning terhadap kasus Demam Berdarah Dengue (DBD) di Jawa Barat. Sistem ini menggunakan data real dari tahun **2016-2024** untuk menganalisis dan memprediksi kasus DBD berdasarkan curah hujan, kepadatan penduduk, dan faktor-faktor lainnya. Aplikasi menampilkan visualisasi interaktif seperti scatter plot, line chart, bar chart, dan pie chart untuk memudahkan pemahaman data.
@@ -47,10 +59,18 @@ Aplikasi frontend tersedia secara online di GitHub Pages:
 
 Backend FastAPI perlu di-deploy ke layanan cloud terpisah karena GitHub Pages tidak support aplikasi server:
 
-**Opsi Deployment (Gratis):**
-1. **Render** - Recommended, free tier tersedia
-2. **Railway** - $5/bulan kredit gratis
-3. **Vercel** - Serverless deployment
+**🆕 Opsi Deployment GRATIS (TANPA Kartu Kredit):**
+1. **Koyeb** ⭐ - RECOMMENDED! UI mudah, tidak perlu CC
+2. **PythonAnywhere** - Always-on, gratis permanen
+3. **Fly.io** - Performa terbaik, CLI-based
+4. **Glitch** - Web IDE, instant preview
+
+**📖 Panduan Lengkap**: Lihat [SOLUSI_DEPLOYMENT_CORS.md](SOLUSI_DEPLOYMENT_CORS.md) atau [ALTERNATIF_DEPLOYMENT_GRATIS.md](ALTERNATIF_DEPLOYMENT_GRATIS.md)
+
+**Opsi Lain (Butuh Kartu Kredit)**:
+1. **Render** - Free tier (sekarang butuh CC untuk verify)
+2. **Railway** - $5/bulan kredit gratis (butuh CC)
+3. **Vercel** - Serverless deployment (kadang error untuk Python)
 
 **Langkah Deployment:**
 1. Baca panduan lengkap di [BACKEND_DEPLOYMENT.md](BACKEND_DEPLOYMENT.md)
