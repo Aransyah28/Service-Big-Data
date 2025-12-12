@@ -1,0 +1,30 @@
+# Fly.io deployment configuration
+# Deploy dengan: fly launch (first time) atau fly deploy
+# 
+# Note: Free tier with auto-stop/auto-start machines
+# - Machines stop after inactivity (cold starts may occur)
+# - First request after stop: ~10-30 seconds
+# - Subsequent requests: normal/fast
+# - For always-on: upgrade to paid plan or use min_machines_running = 1
+
+app = "service-big-data-backend"
+primary_region = "sin"  # Singapore region
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true   # Free tier: machines auto-stop to save resources
+  auto_start_machines = true  # Auto-start on incoming requests
+  min_machines_running = 0    # Free tier: allow all machines to stop
+  processes = ["app"]
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
