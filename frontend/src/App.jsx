@@ -15,10 +15,10 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/Service-Big-Data/" element={<Dashboard />} />
-            <Route path="/Service-Big-Data/monthly" element={<MonthlyData />} />
-            <Route path="/Service-Big-Data/visualizations" element={<Visualizations />} />
-            <Route path="/Service-Big-Data/regional" element={<RegionalData />} />
-            <Route path="/Service-Big-Data/model" element={<ModelInfo />} />
+            <Route path="/monthly" element={<MonthlyData />} />
+            <Route path="/visualizations" element={<Visualizations />} />
+            <Route path="/regional" element={<RegionalData />} />
+            <Route path="/model" element={<ModelInfo />} />
           </Routes>
         </main>
         <footer className="footer">
