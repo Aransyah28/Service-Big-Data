@@ -15,20 +15,20 @@ function Navbar() {
         </Link>
       </div>
       <ul className="navbar-menu">
-        <li className={isActive('/')}>
-          <Link to="/">Dashboard</Link>
+        <li className={isActive('/Service-Big-Data/')}>
+          <Link to="/Service-Big-Data/">Dashboard</Link>
         </li>
-        <li className={isActive('/monthly')}>
-          <Link to="/monthly">Data Bulanan</Link>
+        <li className={isActive('/Service-Big-Data/monthly')}>
+          <Link to="/Service-Big-Data/monthly">Data Bulanan</Link>
         </li>
-        <li className={isActive('/visualizations')}>
-          <Link to="/visualizations">Visualisasi</Link>
+        <li className={isActive('/Service-Big-Data/visualizations')}>
+          <Link to="/Service-Big-Data/visualizations">Visualisasi</Link>
         </li>
-        <li className={isActive('/regional')}>
-          <Link to="/regional">Data Regional</Link>
+        <li className={isActive('/Service-Big-Data/regional')}>
+          <Link to="/Service-Big-Data/regional">Data Regional</Link>
         </li>
-        <li className={isActive('/model')}>
-          <Link to="/model">Info Model</Link>
+        <li className={isActive('/Service-Big-Data/model')}>
+          <Link to="/Service-Big-Data/model">Info Model</Link>
         </li>
       </ul>
     </nav>
