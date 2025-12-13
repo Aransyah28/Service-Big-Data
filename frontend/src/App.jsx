@@ -22,7 +22,7 @@ function App() {
           </Routes>
         </main>
         <footer className="footer">
-          <p>© 2023 DBD Analytics - Proyek UAS Big Data Semester 5</p>
+          <p>© 2025 DBD Analytics - Proyek UAS Big Data Semester 5</p>
         </footer>
       </div>
     </Router>
