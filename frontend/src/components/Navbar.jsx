@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Link to="/">
+        <Link to="/Service-Big-Data/">
           <h1>🦟 DBD Analytics</h1>
         </Link>
       </div>
@@ -18,17 +18,17 @@ function Navbar() {
         <li className={isActive('/Service-Big-Data/')}>
           <Link to="/Service-Big-Data/">Dashboard</Link>
         </li>
-        <li className={isActive('/Service-Big-Data/monthly')}>
-          <Link to="/Service-Big-Data/monthly">Data Bulanan</Link>
+        <li className={isActive('/monthly')}>
+          <Link to="/monthly">Data Bulanan</Link>
         </li>
-        <li className={isActive('/Service-Big-Data/visualizations')}>
-          <Link to="/Service-Big-Data/visualizations">Visualisasi</Link>
+        <li className={isActive('/visualizations')}>
+          <Link to="/visualizations">Visualisasi</Link>
         </li>
-        <li className={isActive('/Service-Big-Data/regional')}>
-          <Link to="/Service-Big-Data/regional">Data Regional</Link>
+        <li className={isActive('/regional')}>
+          <Link to="/regional">Data Regional</Link>
         </li>
-        <li className={isActive('/Service-Big-Data/model')}>
-          <Link to="/Service-Big-Data/model">Info Model</Link>
+        <li className={isActive('/model')}>
+          <Link to="/model">Info Model</Link>
         </li>
       </ul>
     </nav>
