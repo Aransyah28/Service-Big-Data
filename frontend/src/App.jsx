@@ -14,6 +14,7 @@ function App() {
         <Navbar />
         <main className="main-content">
           <Routes>
+            <Route path="/Service-Big-Data" element={<Dashboard />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/monthly" element={<MonthlyData />} />
             <Route path="/visualizations" element={<Visualizations />} />
